@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://addons/top_animated_sprite3d/lib/top_animated_sprite3d.png" type="Texture" id=1]
+
+[resource]
+render_priority = 10
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 1 )

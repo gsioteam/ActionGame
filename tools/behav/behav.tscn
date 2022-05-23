@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://tools/behav/jump.gd" type="Script" id=1]
+[ext_resource path="res://addons/action_behavior_tree/lib/goto.gd" type="Script" id=3]
+[ext_resource path="res://addons/action_behavior_tree/lib/switch.gd" type="Script" id=4]
+[ext_resource path="res://addons/action_behavior_tree/lib/select.gd" type="Script" id=5]
+[ext_resource path="res://addons/action_behavior_tree/lib/during_select.gd" type="Script" id=6]
+[ext_resource path="res://tools/behav/move.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/action_behavior_tree/lib/if.gd" type="Script" id=8]
+[ext_resource path="res://addons/action_behavior_tree/demo/key_down.gd" type="Script" id=9]
+
+[node name="behav" type="Node"]
+script = ExtResource( 5 )
+
+[node name="hurt_check" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="control" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="ground" type="Node" parent="control"]
+script = ExtResource( 6 )
+
+[node name="move" parent="control/ground" instance=ExtResource( 7 )]
+
+[node name="jump" type="Node" parent="control/ground"]
+script = ExtResource( 9 )
+action = "ui_accept"
+
+[node name="to_jump" type="Node" parent="control/ground/jump"]
+script = ExtResource( 3 )
+target_path = NodePath("../../../air/jump")
+
+[node name="air" type="Node" parent="control"]
+script = ExtResource( 6 )
+
+[node name="jump" type="Node" parent="control/air"]
+script = ExtResource( 1 )

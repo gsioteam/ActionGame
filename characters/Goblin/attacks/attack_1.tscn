@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tools/behav/attack.gd" type="Script" id=1]
+[ext_resource path="res://tools/attack_data.gd" type="Script" id=2]
+[ext_resource path="res://effects/hit1/hit1.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+power = 36.0
+direction = Vector3( 1, 1, 0 )
+damage = 5
+attack_type = 0
+
+[node name="attack_1" type="Node"]
+script = ExtResource( 1 )
+action_name = "attack_1"
+hitboxes = PoolStringArray( "hitbox1" )
+hit_frame = 10
+spark = ExtResource( 3 )
+attack_data = SubResource( 1 )

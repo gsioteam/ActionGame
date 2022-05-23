@@ -1,0 +1,123 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://characters/Atlas/atlas.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/Goblin/Goblin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://res/foreground.png" type="Texture" id=4]
+[ext_resource path="res://res/back-buildings.png" type="Texture" id=5]
+[ext_resource path="res://res/far-buildings.png" type="Texture" id=6]
+[ext_resource path="res://res/ground.png" type="Texture" id=7]
+[ext_resource path="res://addons/action_behavior_tree/lib/monitor.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game_scene.gd" type="Script" id=10]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 8, 4, 1 )
+
+[sub_resource type="QuadMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+albedo_texture = ExtResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_transparent = true
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+albedo_texture = ExtResource( 6 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 8, 1, 4 )
+
+[sub_resource type="PlaneMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_texture = ExtResource( 7 )
+metallic = 0.36
+metallic_texture_channel = 2
+uv1_scale = Vector3( 40, 15, 1 )
+
+[sub_resource type="Environment" id=5]
+ambient_light_color = Color( 0.419608, 0.419608, 0.419608, 1 )
+fog_color = Color( 0.847059, 0.886275, 0.921569, 1 )
+dof_blur_far_distance = 152.31
+dof_blur_far_transition = 16.07
+glow_intensity = 1.73
+glow_strength = 1.48
+glow_hdr_threshold = 1.24
+adjustment_brightness = 1.48
+
+[node name="action_scene" type="Spatial"]
+script = ExtResource( 10 )
+gravity = 0.36
+
+[node name="Atlas" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733155, 0 )
+
+[node name="Goblin" parent="." instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1.7998, 0.489821, 0 )
+
+[node name="background" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03616, -2.76999 )
+
+[node name="CollisionShape" type="CollisionShape" parent="background"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="background"]
+transform = Transform( 16, 0, 0, 0, 7.7274, 0.258819, 0, -2.07055, 0.965925, 0, 0, -1.64279 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="background"]
+transform = Transform( 16, 0, 0, 0, 7.7274, 0.258819, 0, -2.07055, 0.965925, 0, -1.08186, -5.48084 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 8 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="background"]
+transform = Transform( 16, 0, 0, 0, 7.7274, 0.258819, 0, -2.07055, 0.965925, 0, -2.25681, -8.9343 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 9 )
+
+[node name="grand" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="grand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="grand"]
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="front" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03616, 2.66623 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="front"]
+shape = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.999985, 0.00529357, 0.00141841, -0.00548031, 0.965911, 0.258815, 0, -0.258819, 0.965926, 0, 2.90471, 6.14956 )
+projection = 1
+current = true
+fov = 15.0
+size = 3.64377
+far = 160.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.4962, 10.0348 )
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )
+
+[node name="Monitor" type="GraphEdit" parent="."]
+visible = false
+margin_right = 680.0
+margin_bottom = 385.0
+scroll_offset = Vector2( -342, -184 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

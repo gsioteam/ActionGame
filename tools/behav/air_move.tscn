@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tools/behav/forward.gd" type="Script" id=1]
+[ext_resource path="res://tools/behav/key_down.gd" type="Script" id=2]
+[ext_resource path="res://tools/behav/air_move.gd" type="Script" id=3]
+
+[node name="air_move" type="Node"]
+script = ExtResource( 3 )
+
+[node name="d1" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "1:1"
+
+[node name="forward" type="Node" parent="d1"]
+script = ExtResource( 1 )
+speed = Vector2( -1, 1 )
+air_move = true
+
+[node name="d2" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "2:1"
+
+[node name="forward" type="Node" parent="d2"]
+script = ExtResource( 1 )
+speed = Vector2( 0, 1 )
+air_move = true
+
+[node name="d3" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "3:1"
+
+[node name="forward" type="Node" parent="d3"]
+script = ExtResource( 1 )
+speed = Vector2( 1, 1 )
+air_move = true
+
+[node name="d4" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "4:1"
+
+[node name="forward" type="Node" parent="d4"]
+script = ExtResource( 1 )
+speed = Vector2( -1, 0 )
+air_move = true
+
+[node name="d6" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "6:1"
+
+[node name="forward" type="Node" parent="d6"]
+script = ExtResource( 1 )
+speed = Vector2( 1, 0 )
+air_move = true
+
+[node name="d7" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "7:1"
+
+[node name="forward" type="Node" parent="d7"]
+script = ExtResource( 1 )
+speed = Vector2( -1, -1 )
+air_move = true
+
+[node name="d8" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "8:1"
+
+[node name="forward" type="Node" parent="d8"]
+script = ExtResource( 1 )
+speed = Vector2( 0, -1 )
+air_move = true
+
+[node name="d9" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "9:1"
+
+[node name="forward" type="Node" parent="d9"]
+script = ExtResource( 1 )
+speed = Vector2( 1, -1 )
+air_move = true

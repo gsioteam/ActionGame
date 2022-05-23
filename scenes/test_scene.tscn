@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/action_behavior_tree/lib/monitor.gd" type="Script" id=1]
+[ext_resource path="res://addons/action_behavior_tree/demo/stick.png" type="Texture" id=2]
+[ext_resource path="res://addons/action_behavior_tree/lib/select.gd" type="Script" id=3]
+[ext_resource path="res://scenes/t1.gd" type="Script" id=4]
+[ext_resource path="res://addons/action_behavior_tree/lib/queue.gd" type="Script" id=6]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Panel
+
+var tick: BNode.Tick
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	tick = BNode.Tick.new(self)
+
+func _physics_process(delta):
+	$behav.tick(tick)
+
+func set_color(color):
+	$Sprite.modulate = color
+
+func set_label(label):
+	$Label.text = label
+"
+
+[sub_resource type="Theme" id=2]
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="test_scene" type="Node2D"]
+
+[node name="Monitor" type="GraphEdit" parent="."]
+margin_right = 815.0
+margin_bottom = 594.0
+scroll_offset = Vector2( -40, -40 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+target_path = NodePath("../Panel/behav")
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 889.0
+margin_top = 31.0
+margin_right = 968.0
+margin_bottom = 95.0
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Panel"]
+position = Vector2( 40, 31 )
+scale = Vector2( 17.25, 1 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 20.0
+margin_top = 22.0
+margin_right = 60.0
+margin_bottom = 36.0
+theme = SubResource( 2 )
+text = "12"
+
+[node name="behav" type="Node" parent="Panel"]
+script = ExtResource( 3 )
+
+[node name="q1" type="Node" parent="Panel/behav"]
+script = ExtResource( 6 )
+
+[node name="q2" type="Node" parent="Panel/behav/q1"]
+script = ExtResource( 6 )
+
+[node name="t1" type="Node" parent="Panel/behav/q1/q2"]
+script = ExtResource( 4 )
+color = Color( 1, 1, 1, 1 )
+label = "1"
+
+[node name="t2" type="Node" parent="Panel/behav/q1/q2"]
+script = ExtResource( 4 )
+color = Color( 1, 0, 0, 1 )
+label = "2"
+
+[node name="t3" type="Node" parent="Panel/behav/q1/q2"]
+script = ExtResource( 4 )
+color = Color( 0, 0.345098, 1, 1 )
+label = "3"
+
+[node name="t4" type="Node" parent="Panel/behav/q1"]
+script = ExtResource( 4 )
+color = Color( 0, 1, 0.109804, 1 )
+label = "4"
