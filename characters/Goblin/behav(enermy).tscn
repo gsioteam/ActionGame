@@ -39,6 +39,7 @@ self_pause = 6
 target_state_mask = 15
 gravity_scaling = 1.05
 damage_scaling = 0.95
+launch_damage = 0
 
 [node name="behav" type="Node"]
 script = ExtResource( 8 )

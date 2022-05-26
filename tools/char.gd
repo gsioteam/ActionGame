@@ -194,7 +194,7 @@ func attack(hitboxes: PoolStringArray, excludes: Array, attack_info: AttackData.
 		attack_info.repeat = true
 	for box_name in hitboxes:
 		var hitbox: Area = get_box(box_name)
-		if hitbox != null and not hitbox.visible:
+		if hitbox == null or not hitbox.visible:
 			continue
 		for box in hitbox.get_overlapping_areas():
 			if box is HurtBox and box.is_visible_in_tree():
