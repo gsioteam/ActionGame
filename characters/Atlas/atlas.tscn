@@ -4341,6 +4341,12 @@ action_name = "special-attack1-p2"
 hitboxes = PoolStringArray( "hitbox1" )
 attack_datas = [ SubResource( 211 ) ]
 
+[node name="cancel2" parent="behav/control/ground/special-attack1/action/cancel/p2" instance=ExtResource( 33 )]
+
+[node name="dash" type="Node" parent="behav/control/ground/special-attack1/action/cancel/p2/cancel2"]
+script = ExtResource( 26 )
+target_path = NodePath("../../../../../../dash")
+
 [node name="cancel" parent="behav/control/ground/special-attack1/action/cancel/p2" instance=ExtResource( 33 )]
 cancel_type = 3
 cancel_frames = 0
