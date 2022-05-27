@@ -33,30 +33,37 @@ gravity = 0.32
 
 [node name="Atlas" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733155, 0 )
+rot = -10.0
 
 [node name="Goblin" parent="." instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1.7998, 0.489821, 0 )
 collision_layer = 2
+rot = -10.0
 
 [node name="PoliceMan" parent="." instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -2.12332, 0.716091, 3.20613e-07 )
 collision_layer = 2
+rot = -10.0
 
 [node name="PoliceMan2" parent="." instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -2.12332, 0.716091, 3.20613e-07 )
 collision_layer = 2
+rot = -10.0
 
 [node name="PoliceMan3" parent="." instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -2.12332, 0.716091, 3.20613e-07 )
 collision_layer = 2
+rot = -10.0
 
 [node name="PoliceMan4" parent="." instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -2.12332, 0.716091, 3.20613e-07 )
 collision_layer = 2
+rot = -10.0
 
 [node name="PoliceMan5" parent="." instance=ExtResource( 7 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -2.12332, 0.716091, 3.20613e-07 )
 collision_layer = 2
+rot = -10.0
 
 [node name="background" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03616, -2.76999 )
@@ -118,11 +125,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="."]
+[node name="interface" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="char_ui" parent="Control" instance=ExtResource( 6 )]
+[node name="char_ui" parent="interface" instance=ExtResource( 6 )]
 margin_left = 29.0
 margin_top = 19.0
 margin_right = 424.0

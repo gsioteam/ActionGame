@@ -1036,7 +1036,7 @@ tracks/9/keys = {
 [sub_resource type="Animation" id=29]
 resource_name = "attack2"
 length = 0.6
-step = 0.15
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("container/sprite:animation")
 tracks/0/interp = 1
@@ -1056,7 +1056,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
@@ -1068,7 +1068,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1133,7 +1133,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.55 ),
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.55 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
@@ -1145,7 +1145,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.75 ),
+"times": PoolRealArray( 0, 0.25, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1210,7 +1210,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.55 ),
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.55 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
@@ -1222,7 +1222,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.75 ),
+"times": PoolRealArray( 0, 0.25, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1267,7 +1267,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=31]
 resource_name = "attack4"
 length = 0.9
-step = 0.15
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("container/sprite:animation")
 tracks/0/interp = 1
@@ -3839,7 +3839,7 @@ tracks/6/keys = {
 [sub_resource type="Resource" id=348]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 10
 attack_type = 1
 direction_type = 2
 direction = Vector3( 2, 3, 0 )
@@ -3869,7 +3869,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=211]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 8
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 6, 0 )
@@ -3899,7 +3899,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=213]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 10
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, -3, 0 )
@@ -4017,7 +4017,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=219]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 10
 attack_type = 4
 direction_type = 0
 direction = Vector3( 3, 2, 0 )
@@ -4045,7 +4045,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=221]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 8
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 1, 0 )
@@ -4089,7 +4089,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=226]
 script = ExtResource( 19 )
 power = 24.0
-damage = 5
+damage = 20
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 3, 0 )

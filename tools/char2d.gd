@@ -4,9 +4,10 @@ class_name Character2D
 
 tool
 
-# Called when the node enters the scene tree for the first time.
+export (float) var rot = 0
+
 func _ready():
-	pass
+	$container/sprite.rotation_degrees = Vector3(rot, 0, 0)
 
 func _face(face):
 	var x = 1

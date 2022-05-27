@@ -1572,7 +1572,7 @@ height = 0.450913
 
 [sub_resource type="Resource" id=319]
 script = ExtResource( 15 )
-power = 24.0
+power = 18.0
 damage = 5
 attack_type = 0
 direction_type = 0
@@ -1581,8 +1581,8 @@ relative_point_name = ""
 spark_scene = ExtResource( 29 )
 self_pause = 6
 target_state_mask = 15
-gravity_scaling = 1.05
-damage_scaling = 0.95
+gravity_scaling = 1.1
+damage_scaling = 0.9
 launch_damage = 0
 
 [sub_resource type="Resource" id=324]
@@ -1596,8 +1596,8 @@ relative_point_name = ""
 spark_scene = ExtResource( 32 )
 self_pause = 6
 target_state_mask = 15
-gravity_scaling = 1.05
-damage_scaling = 0.95
+gravity_scaling = 1.1
+damage_scaling = 0.9
 launch_damage = 0
 
 [sub_resource type="Resource" id=326]
@@ -1611,8 +1611,8 @@ relative_point_name = ""
 spark_scene = ExtResource( 32 )
 self_pause = 6
 target_state_mask = 15
-gravity_scaling = 1.05
-damage_scaling = 0.95
+gravity_scaling = 1.1
+damage_scaling = 0.9
 launch_damage = 0
 
 [sub_resource type="Resource" id=328]
@@ -1626,8 +1626,8 @@ relative_point_name = ""
 spark_scene = ExtResource( 32 )
 self_pause = 6
 target_state_mask = 15
-gravity_scaling = 1.05
-damage_scaling = 0.95
+gravity_scaling = 1.1
+damage_scaling = 0.9
 launch_damage = 0
 
 [node name="PoliceMan" type="KinematicBody"]
@@ -1820,6 +1820,7 @@ attack_datas = [ SubResource( 326 ) ]
 [node name="jump-attack1" type="Node" parent="behav/control/ground"]
 script = ExtResource( 26 )
 probability = 0.4
+cooldown_frames = 180
 
 [node name="area_test" type="Node" parent="behav/control/ground/jump-attack1"]
 script = ExtResource( 10 )

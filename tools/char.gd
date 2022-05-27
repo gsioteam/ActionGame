@@ -51,6 +51,7 @@ var state: int setget set_state, get_state
 var counters: Dictionary = {}
 
 var _hurt_list = []
+var _hurt_count = 0
 var _gravity_scaling = 1
 var _damage_scaling = 1
 
@@ -58,6 +59,14 @@ signal state_changed
 signal damage
 signal dead
 signal hp_changed
+
+export (PackedScene) var hits_label_pack = preload("res://effects/hits_label/hits_label.tscn")
+var _hits_label
+
+func get_hits_label():
+	if _hits_label == null:
+		_hits_label = hits_label_pack.instance()
+	return _hits_label
 
 var _dead = false
 
@@ -69,6 +78,9 @@ func _ready():
 	tick = BNode.Tick.new(self)
 	_origin_face = face
 	
+func free():
+	if _hits_label != null:
+		_hits_label.queue_free()
 
 func get_behav() -> BNode:
 	if _behav == null:
@@ -206,7 +218,7 @@ func attack(hitboxes: PoolStringArray, excludes: Array, attack_info: AttackData.
 				if not excludes.has(character) and attack_info.target_state_mask & (1 << character.state) > 0 && not character.invincible:
 					hit = true
 					excludes.append(character)
-					on_hit(character)
+					on_hit(attack_info, character)
 					character.attack_from(self, attack_info)
 					var scene: Spatial
 					var vec
@@ -237,6 +249,13 @@ func attack_from(from, attack_info: AttackData.Information):
 		var dmg = attack_info.damage * _damage_scaling
 		_hp -= dmg
 		emit_signal("damage", dmg)
+		if from.type == Defines.CharaterType.Ally:
+			var hits_label = get_hits_label()
+			hits_label.text = str(_hurt_list.size(), " hits")
+			var scene = GameScene.current(self)
+			scene.interface.add_child(hits_label)
+			var pos = scene.camera.camera.unproject_position(get_grabbed_point().global_transform.origin + Vector3(0, 0.1, 0))
+			hits_label.reset(pos)
 	if not attack_info.repeat and attack_info.attack_type != AttackData.AttackType.Grab:
 		if exist:
 			_gravity_scaling *= attack_info.gravity_scaling * 2 - 1
@@ -364,6 +383,7 @@ func set_state(v):
 		_state = v
 		if _state == Defines.CharacterState.Stand:
 			_hurt_list.clear()
+			_hurt_count = 0
 			_gravity_scaling = 1
 			_damage_scaling = 1
 		emit_signal("state_changed", _state)
@@ -396,7 +416,7 @@ func dead():
 	_dead = true
 	emit_signal("dead")
 
-func on_hit(target):
+func on_hit(attack_info, target):
 	pass
 
 func shake():

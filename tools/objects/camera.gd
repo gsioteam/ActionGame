@@ -4,10 +4,12 @@ export (float) var min_x = -2
 export (float) var max_x = 2
 
 var anim: AnimationPlayer
+var camera: Camera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim = $anim
+	camera = $camera
 
 func shake():
 	anim.play("shake")

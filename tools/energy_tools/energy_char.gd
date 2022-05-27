@@ -29,5 +29,9 @@ func cast(energy):
 		self.hp -= 10
 		self.energy = (self.energy + max_energy) - energy
 
-func on_hit(target):
+var _old_ai
+func on_hit(attack_info, target):
+	if _old_ai == attack_info:
+		return
+	_old_ai = attack_info
 	self.energy = min(max_energy, self.energy + 2)

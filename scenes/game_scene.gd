@@ -8,7 +8,8 @@ export (float) var gravity = 0.98
 var allies: Array = []
 var enemies: Array = []
 
-var camera
+var camera: Spatial
+var interface: Control
 
 static func current(var node: Node) -> GameScene:
 	var GameScene = load("res://scenes/game_scene.gd") 
@@ -22,8 +23,11 @@ static func current(var node: Node) -> GameScene:
 
 func _ready():
 	camera = $camera
+	interface = $interface
 
 func _get_configuration_warning():
 	if $camera == null:
 		return "No camera found."
+	if $interface == null:
+		return "No interface found."
 	return ""

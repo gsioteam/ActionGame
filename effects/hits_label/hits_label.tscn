@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://res/fonts/ark-pixel-12px-zh_cn.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://effects/hits_label/hits_label.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 1 )
+
+[node name="hits_label" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+times = 1.2
+
+[node name="label" type="Label" parent="."]
+margin_left = -85.0
+margin_top = -14.0
+margin_right = 1.0
+margin_bottom = -2.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_fonts/font = SubResource( 1 )
+text = "18 hits"
+align = 1
