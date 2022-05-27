@@ -23,7 +23,7 @@ var _hp: float = max_hp
 var gravity setget , get_gravity
 
 var paused_frame_count = 0
-var paused: bool setget , get_paused
+var paused: bool setget , is_paused
 
 const Action = preload("res://tools/behav/action.gd")
 var HurtBox
@@ -69,33 +69,37 @@ func _ready():
 	tick = BNode.Tick.new(self)
 	_origin_face = face
 	
-	_behav = $behav
-	_anim = $anim
-	_boxes = $boxes
-	_hurtbox = $boxes/hurtbox
-	_cmds = $cmds
-	_shadow = $shadow
-	_grabbed_point = $boxes/grabbed_point
 
 func get_behav() -> BNode:
+	if _behav == null:
+		_behav = $behav
 	return _behav
 
 func get_anim() -> AnimationPlayer:
+	if _anim == null:
+		_anim = $anim
 	return _anim
 
-func get_hurtbox():
-	return _hurtbox
-
 func get_boxes() -> Spatial:
+	if _boxes == null:
+		_boxes = $boxes
 	return _boxes
 
+var _is_cmds_init = false
 func get_cmds() -> CommandManager:
+	if not _is_cmds_init:
+		_cmds = $cmds
+		_is_cmds_init = true
 	return _cmds
 
 func get_shadow() -> Shadow:
+	if _shadow == null:
+		_shadow = $shadow
 	return _shadow
 
 func get_grabbed_point() -> Position3D:
+	if _grabbed_point == null:
+		_grabbed_point = $boxes/grabbed_point
 	return _grabbed_point
 
 func _physics_process(delta):
@@ -163,7 +167,7 @@ func set_face(value):
 func set_actions(actions: Array):
 	get_cmds().actions = actions
 
-func get_paused():
+func is_paused():
 	return paused_frame_count > 0
 
 func _face(face):
@@ -394,3 +398,19 @@ func dead():
 
 func on_hit(target):
 	pass
+
+func shake():
+	GameScene.current(self).camera.shake()
+
+func _get_configuration_warning():
+	if get_anim() == null:
+		return "No anim(AnimationPlayer) found"
+	if get_behav() == null:
+		return "No behav(BehaviorTree) found"
+	if get_shadow() == null:
+		return "No shadow(Shadow) found"
+	if get_boxes() == null:
+		return "No boxes(Area Testers) found"
+	if get_grabbed_point() == null:
+		return "No grabbed_point found"
+	return ""

@@ -30,7 +30,7 @@ func running(tick: Tick, frame: int):
 		next_phase(tick)
 		finished = true
 	_target = target
-	if is_seismic_toss:
+	if is_seismic_toss and not target.is_paused():
 		target.move_speed.y -= target.gravity
 	if hit_data == null:
 		return
@@ -67,8 +67,8 @@ func direct_attack(this: Character, target: Character, attack_info):
 	if spark_scene != null:
 		scene = spark_scene.instance()
 		scene.set_face(this.face)
-		scene.global_translate(target.get_grabbed_point().global_transform.origin)
 		this.get_parent().add_child(scene)
+		scene.global_translate(target.get_grabbed_point().global_transform.origin)
 	if attack_info.attack_type != AttackData.AttackType.Grab and attack_info.attack_type != AttackData.AttackType.Throw:
 		this.pause(attack_info.self_pause)
 	target.attack_from(this, attack_info)

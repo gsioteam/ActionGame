@@ -87,10 +87,30 @@ direction6 = SubResource( 64 )
 direction8 = SubResource( 65 )
 buttons = [ SubResource( 67 ), SubResource( 68 ), SubResource( 349 ) ]
 
-[sub_resource type="AtlasTexture" id=263]
+[sub_resource type="AtlasTexture" id=281]
 flags = 18
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 148, 140 )
+region = Rect2( 1036, 420, 148, 140 )
+
+[sub_resource type="AtlasTexture" id=282]
+flags = 18
+atlas = ExtResource( 3 )
+region = Rect2( 1184, 420, 148, 140 )
+
+[sub_resource type="AtlasTexture" id=283]
+flags = 18
+atlas = ExtResource( 3 )
+region = Rect2( 1332, 420, 148, 140 )
+
+[sub_resource type="AtlasTexture" id=259]
+flags = 18
+atlas = ExtResource( 3 )
+region = Rect2( 888, 420, 148, 140 )
+
+[sub_resource type="AtlasTexture" id=276]
+flags = 18
+atlas = ExtResource( 3 )
+region = Rect2( 740, 420, 148, 140 )
 
 [sub_resource type="AtlasTexture" id=275]
 flags = 18
@@ -241,31 +261,6 @@ region = Rect2( 148, 980, 148, 140 )
 flags = 18
 atlas = ExtResource( 3 )
 region = Rect2( 148, 420, 148, 140 )
-
-[sub_resource type="AtlasTexture" id=259]
-flags = 18
-atlas = ExtResource( 3 )
-region = Rect2( 888, 420, 148, 140 )
-
-[sub_resource type="AtlasTexture" id=276]
-flags = 18
-atlas = ExtResource( 3 )
-region = Rect2( 740, 420, 148, 140 )
-
-[sub_resource type="AtlasTexture" id=281]
-flags = 18
-atlas = ExtResource( 3 )
-region = Rect2( 1036, 420, 148, 140 )
-
-[sub_resource type="AtlasTexture" id=282]
-flags = 18
-atlas = ExtResource( 3 )
-region = Rect2( 1184, 420, 148, 140 )
-
-[sub_resource type="AtlasTexture" id=283]
-flags = 18
-atlas = ExtResource( 3 )
-region = Rect2( 1332, 420, 148, 140 )
 
 [sub_resource type="AtlasTexture" id=284]
 flags = 18
@@ -592,11 +587,26 @@ flags = 18
 atlas = ExtResource( 3 )
 region = Rect2( 0, 560, 148, 140 )
 
+[sub_resource type="AtlasTexture" id=263]
+flags = 18
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 148, 140 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 263 ) ],
+"frames": [ SubResource( 281 ), SubResource( 282 ), SubResource( 283 ) ],
 "loop": true,
-"name": "idle",
+"name": "rise",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 259 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 276 ) ],
+"loop": true,
+"name": "launched",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 275 ) ],
@@ -642,21 +652,6 @@ animations = [ {
 "frames": [ SubResource( 260 ) ],
 "loop": true,
 "name": "eva-down",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 259 ) ],
-"loop": true,
-"name": "down",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 276 ) ],
-"loop": true,
-"name": "launched",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 281 ), SubResource( 282 ), SubResource( 283 ) ],
-"loop": true,
-"name": "rise",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 284 ), SubResource( 285 ), SubResource( 286 ), SubResource( 287 ), SubResource( 288 ) ],
@@ -742,6 +737,11 @@ animations = [ {
 "frames": [ SubResource( 262 ) ],
 "loop": true,
 "name": "grab",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 263 ) ],
+"loop": true,
+"name": "idle",
 "speed": 5.0
 } ]
 
@@ -970,7 +970,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 1.24668, 0.881872, 0.647659 ), Vector3( 1.24668, 0.881872, 0.647659 ) ]
+"values": [ Vector3( 1.24668, 0.881872, 0.821531 ), Vector3( 1.24668, 0.881872, 0.647659 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("container/sprite:flip_h")
@@ -1133,7 +1133,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.4, 0.55 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.55 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
@@ -1145,7 +1145,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.75 ),
+"times": PoolRealArray( 0, 0.3, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1172,7 +1172,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.5257, 1.20073, 0.647659 ) ]
+"values": [ Vector3( 1.526, 1.201, 0.822 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath(".:move_speed")
@@ -1210,7 +1210,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.4, 0.55 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.55 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
@@ -1222,7 +1222,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 0.75 ),
+"times": PoolRealArray( 0, 0.3, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1249,7 +1249,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.5257, 1.20073, 0.647659 ) ]
+"values": [ Vector3( 1.526, 1.201, 0.822 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath(".:move_speed")
@@ -1258,7 +1258,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.55 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( 2, 0, 0 ), Vector3( 0, 0, 0 ) ]
@@ -1323,10 +1323,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.19444, 1.29727, 0.647659 ), Vector3( 1.19444, 1.29727, 0.647659 ) ]
+"values": [ Vector3( 1.194, 1.297, 0.822 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath(".:move_speed")
@@ -1704,6 +1704,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("boxes/hurtbox:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=70]
 resource_name = "fall_back"
@@ -1779,6 +1791,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("boxes/hurtbox:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=224]
 resource_name = "fall_forward"
@@ -1853,6 +1877,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("boxes/hurtbox:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=114]
@@ -2156,6 +2192,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("boxes/hurtbox:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "jump-attack1"
@@ -2341,10 +2389,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.54255, 1.4266, 0.765146 ) ]
+"values": [ Vector3( 1.543, 1.427, 0.822 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("container/sprite:flip_h")
@@ -2849,7 +2897,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.51327, 1.65563, 0.647659 ) ]
+"values": [ Vector3( 2.16166, 1.65563, 1.01318 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("boxes/hurtbox:visible")
@@ -2913,7 +2961,21 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shake"
+} ]
 }
 
 [sub_resource type="Animation" id=92]
@@ -2989,7 +3051,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 1.86281, 1.36247, 0.647659 ), Vector3( 1.86281, 1.52309, 0.647659 ) ]
+"values": [ Vector3( 1.863, 1.362, 0.822 ), Vector3( 1.863, 1.523, 0.822 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath(".")
@@ -3115,7 +3177,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 1.37179, 1.35083, 0.647659 ), Vector3( 1.24645, 1.35083, 0.647659 ) ]
+"values": [ Vector3( 1.372, 1.351, 0.822 ), Vector3( 1.246, 1.351, 0.822 ) ]
 }
 
 [sub_resource type="Animation" id=96]
@@ -3180,7 +3242,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.03487, 1.24741, 0.647659 ) ]
+"values": [ Vector3( 1.035, 1.247, 0.822 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("boxes/hitbox1:translation")
@@ -3307,7 +3369,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0.1, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector3( 1.36425, 1.43011, 0.647659 ), Vector3( 1.91541, 2.03223, 0.647659 ) ]
+"values": [ Vector3( 1.364, 1.43, 0.822 ), Vector3( 1.915, 2.032, 0.822 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath(".:move_speed")
@@ -3407,7 +3469,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( -0.603656, 0.328958, 0 ), Vector3( -0.325, 0.329, 0.111856 ), Vector3( 0.353, 0.329, 0.112 ), Vector3( 0.595, 0.329, 0 ), Vector3( 0.365, 0.329, -0.1 ), Vector3( -0.314, 0.329, -0.1 ) ]
+"values": [ Vector3( -0.603656, 0.328958, 0 ), Vector3( -0.325, 0.329, 0.2 ), Vector3( 0.353, 0.329, 0.2 ), Vector3( 0.595, 0.329, 0 ), Vector3( 0.365, 0.329, -0.2 ), Vector3( -0.314, 0.329, -0.2 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("boxes/hitbox1:scale")
@@ -3419,7 +3481,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 1.26465, 1.29727, 0.647659 ) ]
+"values": [ Vector3( 1.265, 1.297, 0.822 ) ]
 }
 
 [sub_resource type="Animation" id=203]
@@ -4113,7 +4175,7 @@ collision_mask = 0
 script = ExtResource( 13 )
 
 [node name="hitbox1" parent="boxes" instance=ExtResource( 11 )]
-transform = Transform( 1.26465, 0, -1.19248e-08, 0, 1.29727, 0, 2.3285e-08, 0, 0.647659, 0.348382, 0.392226, 0 )
+transform = Transform( 1.26465, 0, -1.65653e-08, 0, 1.29727, 0, 3.23461e-08, 0, 0.647659, 0.348382, 0.392226, 0 )
 visible = false
 collision_layer = 0
 collision_mask = 2
@@ -4255,7 +4317,7 @@ target_path = NodePath("../../../../air/jump_only/jump")
 
 [node name="special-attack1" type="Node" parent="behav/control/ground"]
 script = ExtResource( 41 )
-action = "46,a<:5"
+action = "4<,6<:10,a<:5"
 fit_face_to = true
 
 [node name="action" type="Node" parent="behav/control/ground/special-attack1"]
@@ -4289,7 +4351,7 @@ target_path = NodePath("../../../../../../special-attack2")
 
 [node name="special-attack2" type="Node" parent="behav/control/ground"]
 script = ExtResource( 41 )
-action = "28,a<:5"
+action = "2<,8<:10,a<:5"
 fit_face_to = true
 
 [node name="action" type="Node" parent="behav/control/ground/special-attack2"]
@@ -4354,10 +4416,6 @@ target_path = NodePath("../../../../special-attack1")
 script = ExtResource( 26 )
 target_path = NodePath("../../../../special-attack2")
 
-[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel"]
-script = ExtResource( 26 )
-target_path = NodePath("../../../../special-attack3")
-
 [node name="attack2" type="Node" parent="behav/control/ground/attack1/action/cancel"]
 script = ExtResource( 17 )
 action = "a<:5"
@@ -4377,10 +4435,6 @@ target_path = NodePath("../../../../../../../special-attack1")
 [node name="special-attack2" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel"]
 script = ExtResource( 26 )
 target_path = NodePath("../../../../../../../special-attack2")
-
-[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel"]
-script = ExtResource( 26 )
-target_path = NodePath("../../../../../../../special-attack3")
 
 [node name="attack3-forward" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel"]
 script = ExtResource( 17 )
@@ -4431,10 +4485,6 @@ target_path = NodePath("../../../../../../../../../../special-attack1")
 script = ExtResource( 26 )
 target_path = NodePath("../../../../../../../../../../special-attack2")
 
-[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel"]
-script = ExtResource( 26 )
-target_path = NodePath("../../../../../../../../../../special-attack3")
-
 [node name="attack4" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel"]
 script = ExtResource( 17 )
 action = "a<:5"
@@ -4455,9 +4505,33 @@ target_path = NodePath("../../../../../../../../../../../../../special-attack1")
 script = ExtResource( 26 )
 target_path = NodePath("../../../../../../../../../../../../../special-attack2")
 
-[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel/attack4/action/cancel"]
+[node name="cancel2" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel/attack4/action" instance=ExtResource( 33 )]
+cancel_type = 3
+
+[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel/attack4/action/cancel2"]
 script = ExtResource( 26 )
 target_path = NodePath("../../../../../../../../../../../../../special-attack3")
+
+[node name="cancel2" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action" instance=ExtResource( 33 )]
+cancel_type = 3
+
+[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel/attack3/action/cancel2"]
+script = ExtResource( 26 )
+target_path = NodePath("../../../../../../../../../../special-attack3")
+
+[node name="cancel2" parent="behav/control/ground/attack1/action/cancel/attack2/action" instance=ExtResource( 33 )]
+cancel_type = 3
+
+[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel/attack2/action/cancel2"]
+script = ExtResource( 26 )
+target_path = NodePath("../../../../../../../special-attack3")
+
+[node name="cancel2" parent="behav/control/ground/attack1/action" instance=ExtResource( 33 )]
+cancel_type = 3
+
+[node name="special-attack3" type="Node" parent="behav/control/ground/attack1/action/cancel2"]
+script = ExtResource( 26 )
+target_path = NodePath("../../../../special-attack3")
 
 [node name="guard" type="Node" parent="behav/control/ground"]
 script = ExtResource( 17 )

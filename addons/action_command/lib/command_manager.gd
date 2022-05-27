@@ -11,7 +11,7 @@ const ActionStatus = Status.ActionStatus
 	
 export(int) var max_cache_frame = 30
 
-export (Resource) var resource
+export (Resource) var resource = CommandResource.new()
 
 var _controller: CommandResource.Controller
 var _actives: Array = []
@@ -115,6 +115,8 @@ func _input(event):
 
 
 func refresh():
+	if resource == null:
+		resource = CommandResource.new()
 	_controller = resource.get_controller()
 	_actives.clear()
 	_silents.clear()

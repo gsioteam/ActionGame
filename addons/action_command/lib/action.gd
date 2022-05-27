@@ -2,7 +2,7 @@ extends Resource
 
 class_name CommandAction, "action.png"
 
-const TestResult = preload("status.gd").TestResult
+const TestResult = preload("res://addons/action_command/lib/status.gd").TestResult
 
 export(String) var action_name
 

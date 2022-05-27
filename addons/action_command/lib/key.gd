@@ -1,10 +1,7 @@
-extends Resource
+extends CommandAction
 
 class_name CommandKey, "action.png"
 
-const TestResult = preload("status.gd").TestResult
-
-export(String) var action_name
 export (int) var scancode
 
 func test(event: InputEvent) -> int:
