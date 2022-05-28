@@ -4168,7 +4168,7 @@ resource = SubResource( 62 )
 [node name="container" type="Spatial" parent="."]
 
 [node name="sprite" type="AnimatedSprite3D" parent="container"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173512, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.203379, 0 )
 frames = SubResource( 2 )
 animation = "idle"
 

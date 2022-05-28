@@ -258,8 +258,8 @@ func attack_from(from, attack_info: AttackData.Information):
 			hits_label.reset(pos)
 	if not attack_info.repeat and attack_info.attack_type != AttackData.AttackType.Grab:
 		if exist:
-			_gravity_scaling *= attack_info.gravity_scaling * 2 - 1
-			_damage_scaling *= attack_info.damage_scaling * 2 - 1
+			_gravity_scaling *= max(0.05, attack_info.gravity_scaling * 2 - 1) 
+			_damage_scaling *= max(0.05, attack_info.damage_scaling * 2 - 1)
 		else:
 			_gravity_scaling *= attack_info.gravity_scaling
 			_damage_scaling *= attack_info.damage_scaling
@@ -315,10 +315,11 @@ func air_test() -> bool:
 func _enter_tree():
 	if Engine.editor_hint:
 		return
+	var game_scene = GameScene.current(self)
 	if type == Defines.CharaterType.Ally:
-		GameScene.current(self).allies.append(self)
+		game_scene.allies.append(self)
 	elif type == Defines.CharaterType.Enemy:
-		GameScene.current(self).enemies.append(self)
+		game_scene.enemies.append(self)
 
 func _exit_tree():
 	if Engine.editor_hint:

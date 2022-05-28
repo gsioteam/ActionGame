@@ -4,6 +4,7 @@ extends Node
 class_name GameScene
 
 export (float) var gravity = 0.98
+export (float) var rot = 10
 
 var allies: Array = []
 var enemies: Array = []

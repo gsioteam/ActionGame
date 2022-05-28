@@ -13,7 +13,6 @@ func _ready():
 
 func _on_cancel_pressed():
 	var ret = ResourceSaver.save(Defines.ConfigPath, config)
-	print("Save ", ret)
 	var scene_pack = load("res://ui/main_menu/main_menu.tscn")
 	var scene = scene_pack.instance()
 	get_parent().add_child(scene)
