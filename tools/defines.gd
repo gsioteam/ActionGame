@@ -24,6 +24,7 @@ enum CharacterState {
 
 const GrabbedCounter = "grabbed_counter"
 const InvincibleCounter = "invincible_counter"
+const ConfigPath = "user://config.tres"
 
 static func instance(path: String):
 	if Engine.has_meta(path):

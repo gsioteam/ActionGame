@@ -1,7 +1,7 @@
 extends Character2D
 
 export (int) var max_energy = 100
-var _energy: float
+var _energy: float = max_energy
 
 var energy: float setget set_energy, get_energy
 
@@ -9,7 +9,7 @@ signal energy_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_energy = max_energy
+	pass
 
 func set_energy(v):
 	if _energy != v:

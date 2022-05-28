@@ -12,7 +12,7 @@ func test(tick: Tick):
 		_check_box = target.get_boxes().find_node(check_box)
 	var boxes = _check_box.get_overlapping_areas()
 	for box in boxes:
-		if box is HurtBox and box.visible:
+		if box is HurtBox and box.is_visible_in_tree():
 			var character: Character = box.character
 			if character.state == Defines.CharacterState.Stand and character.get_counter(Defines.GrabbedCounter) == 0:
 				tick.global_context.grab_target = character

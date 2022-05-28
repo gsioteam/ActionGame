@@ -1,0 +1,52 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://addons/action_command/lib/key.gd" type="Script" id=1]
+[ext_resource path="res://addons/action_command/lib/command_resource.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+action_name = "a"
+scancode = 16777351
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 1 )
+action_name = "b"
+scancode = 16777352
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+action_name = "c"
+scancode = 16777353
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 1 )
+action_name = "d"
+scancode = 16777355
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+action_name = "2"
+scancode = 16777234
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 1 )
+action_name = "4"
+scancode = 16777231
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 1 )
+action_name = "6"
+scancode = 16777233
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 1 )
+action_name = "8"
+scancode = 16777232
+
+[resource]
+script = ExtResource( 2 )
+direction2 = SubResource( 5 )
+direction4 = SubResource( 6 )
+direction6 = SubResource( 7 )
+direction8 = SubResource( 8 )
+buttons = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]

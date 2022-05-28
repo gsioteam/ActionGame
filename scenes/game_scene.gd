@@ -31,3 +31,12 @@ func _get_configuration_warning():
 	if $interface == null:
 		return "No interface found."
 	return ""
+
+func set_player(player: Spatial, at: int):
+	add_child(player)
+	var trans = Transform.IDENTITY
+	var pos: Spatial = $characters.get_child(at)
+	trans.origin = pos.transform.origin
+	player.transform = trans
+	var char_ui = $interface/chars.get_child(at)
+	char_ui.target = player
