@@ -11,3 +11,6 @@ func test(event: InputEvent) -> int:
 		else:
 			return TestResult.Silent
 	return TestResult.NoRelevant
+
+func action_string():
+	return OS.get_scancode_string(scancode)

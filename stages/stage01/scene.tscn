@@ -137,7 +137,15 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="char_ui" parent="interface/chars" instance=ExtResource( 6 )]
+visible = false
 margin_left = 29.0
 margin_top = 19.0
 margin_right = 424.0
+margin_bottom = 74.0
+
+[node name="char_ui2" parent="interface/chars" instance=ExtResource( 6 )]
+visible = false
+margin_left = 540.0
+margin_top = 19.0
+margin_right = 935.0
 margin_bottom = 74.0

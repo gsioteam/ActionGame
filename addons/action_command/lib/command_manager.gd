@@ -49,7 +49,7 @@ class MatchResult:
 			var last = frame_data[frame_data.size() - 1]
 			for data in last:
 				data.used = true
-		elif type == UseType.Press:
+		elif UseType.Press:
 			for frame in frame_data:
 				for data in frame:
 					if data.state == ActionState.Press:

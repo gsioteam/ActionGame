@@ -41,3 +41,4 @@ func set_player(player: Spatial, at: int):
 	player.transform = trans
 	var char_ui = $interface/chars.get_child(at)
 	char_ui.target = player
+	char_ui.visible = true

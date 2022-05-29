@@ -1573,7 +1573,7 @@ height = 0.450913
 [sub_resource type="Resource" id=319]
 script = ExtResource( 15 )
 power = 18.0
-damage = 16
+damage = 5
 attack_type = 0
 direction_type = 0
 direction = Vector3( 2, 3.8, 0 )
@@ -1582,13 +1582,13 @@ spark_scene = ExtResource( 29 )
 self_pause = 6
 target_state_mask = 15
 gravity_scaling = 1.1
-damage_scaling = 0.6
+damage_scaling = 0.5
 launch_damage = 0
 
 [sub_resource type="Resource" id=324]
 script = ExtResource( 15 )
 power = 24.0
-damage = 16
+damage = 8
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 3, 0 )
@@ -1603,7 +1603,7 @@ launch_damage = 0
 [sub_resource type="Resource" id=326]
 script = ExtResource( 15 )
 power = 24.0
-damage = 18
+damage = 12
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 3, 0 )
@@ -1612,13 +1612,13 @@ spark_scene = ExtResource( 32 )
 self_pause = 6
 target_state_mask = 15
 gravity_scaling = 1.1
-damage_scaling = 0.6
+damage_scaling = 0.5
 launch_damage = 0
 
 [sub_resource type="Resource" id=328]
 script = ExtResource( 15 )
 power = 24.0
-damage = 20
+damage = 14
 attack_type = 1
 direction_type = 0
 direction = Vector3( 2, 3, 0 )
@@ -1627,7 +1627,7 @@ spark_scene = ExtResource( 32 )
 self_pause = 6
 target_state_mask = 15
 gravity_scaling = 1.1
-damage_scaling = 0.6
+damage_scaling = 0.3
 launch_damage = 0
 
 [node name="PoliceMan" type="KinematicBody"]
@@ -1836,15 +1836,16 @@ begin_speed = Vector3( 3, 5, 0 )
 [node name="Action" type="Node" parent="behav/control/ground/jump-attack1/area_test/action"]
 script = ExtResource( 35 )
 
-[node name="Period" type="Node" parent="behav/control/ground"]
+[node name="idle_period" type="Node" parent="behav/control/ground"]
 script = ExtResource( 7 )
 duration = 30
 
-[node name="idle" type="Node" parent="behav/control/ground/Period"]
+[node name="idle" type="Node" parent="behav/control/ground/idle_period"]
 script = ExtResource( 16 )
 
 [node name="reselect_target" type="Node" parent="behav/control/ground"]
 script = ExtResource( 11 )
+probability = 0.8
 
 [node name="clear_target" type="Node" parent="behav/control/ground/reselect_target"]
 script = ExtResource( 4 )

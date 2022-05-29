@@ -20,7 +20,7 @@ func _find(tick: Tick):
 			var ally_pos = ally.global_transform.origin
 			ally_pos.y = 0
 			var dis = this_pos.distance_to(ally_pos)
-			if dis < min_dis:
+			if ally.hp > 0 and dis < min_dis:
 				min_dis = dis
 				target = ally
 		return target

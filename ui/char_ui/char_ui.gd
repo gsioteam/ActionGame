@@ -17,6 +17,8 @@ var _tp: Gauge
 func _ready():
 	if target == null:
 		target = get_node(target_path)
+	if target == null:
+		return
 	target.connect("damage", self, "_on_damage")
 	target.connect("hp_changed", self, "_on_hp_changed")
 	target.connect("energy_changed", self, "_on_energy_changed")

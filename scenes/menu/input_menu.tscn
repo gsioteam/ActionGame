@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/menu/input_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/cell.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/action_command/lib/key_input_dialog.gd" type="Script" id=3]
 
 [node name="input_menu" type="Control"]
 anchor_right = 1.0
@@ -54,6 +55,51 @@ margin_top = 168.0
 margin_bottom = 188.0
 title = "1P:D"
 
+[node name="VSplitContainer" type="VSplitContainer" parent="vbox"]
+margin_top = 192.0
+margin_right = 731.0
+margin_bottom = 192.0
+
+[node name="2p_up" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 196.0
+margin_bottom = 216.0
+title = "1P:UP"
+
+[node name="2p_down" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 220.0
+margin_bottom = 240.0
+title = "1P:DOWN"
+
+[node name="2p_left" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 244.0
+margin_bottom = 264.0
+title = "1P:LEFT"
+
+[node name="2p_right" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 268.0
+margin_bottom = 288.0
+title = "1P:RIGHT"
+
+[node name="2p_a" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 292.0
+margin_bottom = 312.0
+title = "1P:A"
+
+[node name="2p_b" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 316.0
+margin_bottom = 336.0
+title = "1P:B"
+
+[node name="2p_c" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 340.0
+margin_bottom = 360.0
+title = "1P:C"
+
+[node name="2p_d" parent="vbox" instance=ExtResource( 2 )]
+margin_top = 364.0
+margin_bottom = 384.0
+title = "1P:D"
+
 [node name="cancel" type="Button" parent="."]
 margin_left = 34.0
 margin_top = 26.0
@@ -61,4 +107,26 @@ margin_right = 191.0
 margin_bottom = 50.0
 text = "cancel"
 
+[node name="input" type="ConfirmationDialog" parent="."]
+margin_right = 400.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 400, 140 )
+script = ExtResource( 3 )
+
+[connection signal="button_pressed" from="vbox/1p_up" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_down" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_left" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_right" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_a" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_b" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_c" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/1p_d" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_up" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_down" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_left" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_right" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_a" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_b" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_c" to="." method="_on_button_pressed"]
+[connection signal="button_pressed" from="vbox/2p_d" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]

@@ -15,8 +15,7 @@ func tick(tick: Tick):
 	else:
 		if _running:
 			_running = false
-			find_first().run_tick(tick)
-			return Status.SUCCEED
+			return find_first().run_tick(tick)
 		else:
 			_running = true
 			_runningCount = duration

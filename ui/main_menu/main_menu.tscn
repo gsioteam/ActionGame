@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://res/fonts/ark_pixel.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=2]
 [ext_resource path="res://configs/configs.tres" type="Resource" id=3]
+[ext_resource path="res://ui/main_menu/menu_select.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 0, 1 )
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -10,7 +17,7 @@ anchor_bottom = 1.0
 script = ExtResource( 2 )
 default_config = ExtResource( 3 )
 
-[node name="rect" type="Control" parent="."]
+[node name="rect" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.6
 anchor_right = 0.5
@@ -19,22 +26,33 @@ margin_left = -200.0
 margin_top = -90.0
 margin_right = 200.0
 margin_bottom = 110.0
+alignment = 1
+script = ExtResource( 4 )
 
-[node name="start" type="Button" parent="rect"]
-margin_left = 120.0
-margin_top = 45.0
-margin_right = 281.0
-margin_bottom = 65.0
+[node name="1p_start" type="Button" parent="rect"]
+margin_top = 69.0
+margin_right = 400.0
+margin_bottom = 87.0
 custom_fonts/font = ExtResource( 1 )
-text = "Start"
+custom_styles/focus = SubResource( 1 )
+text = "1 Player"
+flat = true
+
+[node name="2p_start" type="Button" parent="rect"]
+margin_top = 91.0
+margin_right = 400.0
+margin_bottom = 109.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "2 Players"
 flat = true
 
 [node name="menu" type="Button" parent="rect"]
-margin_left = 120.0
-margin_top = 74.0
-margin_right = 281.0
-margin_bottom = 94.0
+margin_top = 113.0
+margin_right = 400.0
+margin_bottom = 131.0
 custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
 text = "Menu"
 flat = true
 
@@ -48,5 +66,6 @@ custom_fonts/font = ExtResource( 1 )
 text = "Exit"
 flat = true
 
-[connection signal="pressed" from="rect/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="rect/1p_start" to="." method="_on_1p_start_pressed"]
+[connection signal="pressed" from="rect/2p_start" to="." method="_on_2p_start_pressed"]
 [connection signal="pressed" from="rect/menu" to="." method="_on_menu_pressed"]

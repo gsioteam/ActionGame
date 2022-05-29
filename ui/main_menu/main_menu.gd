@@ -21,7 +21,7 @@ func _on_menu_pressed():
 	get_parent().add_child(scene)
 	queue_free()
 
-func _on_start_pressed():
+func _on_1p_start_pressed():
 	var scene_pack = load("res://stages/stage01/scene.tscn")
 	var scene = scene_pack.instance()
 	var player_pack = load("res://characters/Atlas/atlas.tscn")
@@ -29,6 +29,22 @@ func _on_start_pressed():
 	player.get_cmds().resource = config.commands_1p
 	player.get_cmds().refresh()
 	scene.set_player(player, 0)
-	modulate = Color.transparent
+	
+	get_parent().add_child(scene)
+	queue_free()
+
+func _on_2p_start_pressed():
+	var scene_pack = load("res://stages/stage01/scene.tscn")
+	var scene = scene_pack.instance()
+	var player_pack = load("res://characters/Atlas/atlas.tscn")
+	var player = player_pack.instance()
+	player.get_cmds().resource = config.commands_1p
+	player.get_cmds().refresh()
+	scene.set_player(player, 0)
+	player = player_pack.instance()
+	player.get_cmds().resource = config.commands_2p
+	player.get_cmds().refresh()
+	scene.set_player(player, 1)
+	
 	get_parent().add_child(scene)
 	queue_free()

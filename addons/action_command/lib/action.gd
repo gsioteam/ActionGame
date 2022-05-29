@@ -8,3 +8,6 @@ export(String) var action_name
 
 func test(event: InputEvent) -> int:
 	return TestResult.NoRelevant
+
+func action_string():
+	return action_name

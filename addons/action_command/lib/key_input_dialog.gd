@@ -10,7 +10,8 @@ var session: InputSession
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	connect("hide", self, "_on_key_input_dialog_popup_hide")
+	connect("confirmed", self, "_on_key_input_dialog_confirmed")
 
 func _input(event):
 	if session != null:
@@ -33,7 +34,6 @@ func input_key(session: InputSession):
 func _on_key_input_dialog_confirmed():
 	if session != null:
 		session.confirmed = true
-
 
 func _on_key_input_dialog_popup_hide():
 	if session != null:

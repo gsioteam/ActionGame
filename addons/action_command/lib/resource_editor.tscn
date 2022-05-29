@@ -48,6 +48,7 @@ text = "Save"
 flat = true
 
 [node name="panel" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -140,7 +141,4 @@ filters = PoolStringArray( "*.tres", "*.res" )
 [connection signal="button_pressed" from="panel/vbox/hbox/arrow8" to="." method="_on8_button_pressed"]
 [connection signal="pressed" from="panel/vbox/buttons/add_button" to="." method="_on_add_button_pressed"]
 [connection signal="file_selected" from="save_file_dialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="confirmed" from="key_input_dialog" to="key_input_dialog" method="_on_key_input_dialog_confirmed"]
-[connection signal="custom_action" from="key_input_dialog" to="key_input_dialog" method="_on_key_input_dialog_custom_action"]
-[connection signal="popup_hide" from="key_input_dialog" to="key_input_dialog" method="_on_key_input_dialog_popup_hide"]
 [connection signal="file_selected" from="open_file_dialog" to="." method="_on_open_file_dialog_file_selected"]

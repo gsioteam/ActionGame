@@ -6,8 +6,18 @@ var _selected:BNode = null
 func tick(tick):
 	if _selected != null:
 		var result = _selected.run_tick(tick);
+		var node = _selected
 		if result != Status.RUNNING:
 			_selected = null
+		if result == Status.FAILED:
+			var idx = node.get_index() + 1
+			for off in range(idx, get_child_count()):
+				var child = get_child(off)
+				result = child.run_tick(tick)
+				if result == Status.RUNNING:
+					_selected = child
+				if result != Status.FAILED:
+					return result
 		return result
 	else:
 		var priority_node = _priority
