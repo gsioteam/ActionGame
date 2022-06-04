@@ -8,6 +8,7 @@ export var fall_back_anim: String = ""
 
 func action(tick: Tick):
 	var target: Character = tick.target
+	target.current_action = self
 	var gravity = target.gravity
 	var fall_speed = target.v_speed
 	fall_speed = max(fall_speed - gravity, -maxnum_speed)

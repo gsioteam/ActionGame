@@ -16,6 +16,8 @@ func shake():
 
 func _process(delta):
 	var scene = GameScene.current(self)
+	if scene.allies.size() == 0:
+		return;
 	var target = 0
 	for ally in scene.allies:
 		target += ally.translation.x

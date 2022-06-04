@@ -25,6 +25,8 @@ func _ready():
 			cancel_nodes.append(child)
 
 func action(tick):
+	var target = tick.target
+	target.current_action = self
 	attacked.clear()
 	_phase = 0
 	hit_counter = -1

@@ -22,6 +22,12 @@ enum CharacterState {
 	Grabbed
 }
 
+enum OnlineState {
+	Offline,
+	Online
+}
+
+const RoomName = "game_room"
 const GrabbedCounter = "grabbed_counter"
 const InvincibleCounter = "invincible_counter"
 const ConfigPath = "user://config.tres"
@@ -35,3 +41,13 @@ static func instance(path: String):
 			ins = ins.new()
 		Engine.set_meta(path, ins)
 		return ins
+
+const default_config = preload("res://configs/configs.tres")
+
+static func load_config():
+	var config
+	if ResourceLoader.exists(ConfigPath):
+		config = ResourceLoader.load(ConfigPath)
+	else:
+		config = default_config
+	return config

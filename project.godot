@@ -87,12 +87,12 @@ _global_script_class_icons={
 [application]
 
 config/name="ActionGame"
-run/main_scene="res://ui/main_menu/main_menu.tscn"
+run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/action_behavior_tree/plugin.cfg", "res://addons/action_command/plugin.cfg", "res://addons/top_animated_sprite3d/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/action_behavior_tree/plugin.cfg", "res://addons/action_command/plugin.cfg", "res://addons/godot_colyseus/plugin.cfg", "res://addons/top_animated_sprite3d/plugin.cfg" )
 
 [importer_defaults]
 
@@ -107,5 +107,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+threads/thread_safe_bvh=true
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
 quality/voxel_cone_tracing/high_quality=true

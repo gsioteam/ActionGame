@@ -1,18 +1,10 @@
 extends Control
 
-const ConfigPath = "user://config.tres"
-
-export (Resource) var default_config
-
 var config
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if ResourceLoader.exists(ConfigPath):
-		config = ResourceLoader.load(ConfigPath)
-	else:
-		config = default_config
+	config = Defines.load_config()
 
 func _on_menu_pressed():
 	var scene_pack = load("res://scenes/menu/input_menu.tscn")
@@ -48,3 +40,7 @@ func _on_2p_start_pressed():
 	
 	get_parent().add_child(scene)
 	queue_free()
+
+
+func _on_remote_pressed():
+	get_tree().change_scene("res://scenes/remote_list/remote_list.tscn")

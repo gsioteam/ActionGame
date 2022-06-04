@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://ui/char_ui/char_ui.gd" type="Script" id=1]
+[ext_resource path="res://scenes/char_ui/char_ui.gd" type="Script" id=1]
 [ext_resource path="res://tools/char/gauge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Atlas/avatar.png" type="Texture" id=3]
 

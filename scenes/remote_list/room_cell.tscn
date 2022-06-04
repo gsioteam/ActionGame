@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://res/fonts/ark_pixel.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/remote_list/room_cell.gd" type="Script" id=2]
+
+[node name="room_cell" type="HBoxContainer"]
+margin_right = 759.0
+margin_bottom = 18.0
+script = ExtResource( 2 )
+
+[node name="name" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 377.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "hello"
+
+[node name="enter" type="Button" parent="."]
+margin_left = 381.0
+margin_right = 759.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Enter"
+flat = true
+
+[connection signal="pressed" from="enter" to="." method="_on_enter_pressed"]

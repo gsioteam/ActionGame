@@ -104,3 +104,4 @@ buttons = [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource
 script = ExtResource( 1 )
 commands_1p = SubResource( 9 )
 commands_2p = SubResource( 18 )
+online_name = "Player"

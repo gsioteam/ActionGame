@@ -16,6 +16,7 @@ var anim_index = -1
 
 func action(tick):
 	var target = tick.target
+	target.current_action = self
 	target.state = Defines.CharacterState.Pain
 	if animations == null:
 		animations = []

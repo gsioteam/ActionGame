@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/remote_list/room_ui.gd" type="Script" id=1]
+
+[node name="room_ui" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="menu" type="VBoxContainer" parent="."]
+margin_left = 29.0
+margin_top = 21.0
+margin_right = 198.0
+margin_bottom = 160.0
+
+[node name="ready" type="Button" parent="menu"]
+margin_right = 169.0
+margin_bottom = 20.0
+text = "Prepare"
+
+[node name="split" type="VSplitContainer" parent="menu"]
+margin_top = 24.0
+margin_right = 169.0
+margin_bottom = 24.0
+
+[node name="exit" type="Button" parent="menu"]
+margin_top = 28.0
+margin_right = 169.0
+margin_bottom = 48.0
+text = "Exit"
+
+[node name="list" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 235.0
+margin_top = 23.0
+margin_right = -30.0
+margin_bottom = -30.0
+
+[node name="box" type="VBoxContainer" parent="list"]
+margin_right = 759.0
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="menu/ready" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="menu/exit" to="." method="_on_exit_pressed"]

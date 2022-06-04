@@ -16,6 +16,7 @@ var _frame_counter = 0;
 
 func action(tick):
 	var target: Character = tick.target
+	target.current_action = self
 	var turning = _frame_counter < data.turn_frames and face != Defines.Face.None and target.face != face
 	
 	if not air_move:

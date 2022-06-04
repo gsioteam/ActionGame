@@ -4,6 +4,7 @@ signal finished
 
 func action(tick):
 	var target: Character = tick.target
+	target.current_action = self
 	target.animate('launched', true)
 	target.move_speed.y = 2
 	yield(self, "finished")

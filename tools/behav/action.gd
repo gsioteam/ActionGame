@@ -13,12 +13,13 @@ func action(tick):
 		target.set_xy_speed(Vector2.ZERO)
 	var yield_state: GDScriptFunctionState = target.animate(action_name, true)
 	yield(yield_state, "completed")
-	target.current_action = null
+	# target.current_action = null
 	return Status.SUCCEED
 
 func next_phase(tick):
 	pass
 
 func stop_running():
-	if __target != null and __target.current_action == self:
-		__target.current_action = null
+	#if __target != null and __target.current_action == self:
+	#	__target.current_action = null
+	pass

@@ -9,6 +9,7 @@ var _canceled = false
 
 func action(tick):
 	var target: Character = tick.target
+	target.current_action = self
 	target.state = Defines.CharacterState.Down
 	var hurt_data: AttackData.Information = target.get_hurt_data()
 	var frames = int(hurt_data.power * 1.2)

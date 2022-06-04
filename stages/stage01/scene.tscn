@@ -1,12 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://stages/stage01/N01.png" type="Texture" id=1]
 [ext_resource path="res://characters/Goblin/Goblin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://stages/stage01/back.png" type="Texture" id=4]
 [ext_resource path="res://stages/stage01/F01.png" type="Texture" id=5]
-[ext_resource path="res://ui/char_ui/char_ui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/char_ui/char_ui.tscn" type="PackedScene" id=6]
 [ext_resource path="res://characters/PoliceMan/PoliceMan.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/action_behavior_tree/lib/monitor.gd" type="Script" id=8]
 [ext_resource path="res://tools/objects/camera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/game_scene.gd" type="Script" id=10]
 
@@ -117,16 +116,6 @@ light_energy = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
-
-[node name="Monitor" type="GraphEdit" parent="."]
-visible = false
-margin_right = 680.0
-margin_bottom = 385.0
-scroll_offset = Vector2( -342, -184 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="interface" type="Control" parent="."]
 anchor_right = 1.0

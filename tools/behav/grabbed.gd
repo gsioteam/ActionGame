@@ -13,6 +13,7 @@ var character
 
 func action(tick):
 	var target: Character = tick.target
+	target.current_action = self
 	var hurt_data = target.get_hurt_data()
 	self.target = hurt_data.relative_point
 	character = target

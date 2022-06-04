@@ -63,6 +63,7 @@ func action(tick):
 
 func running(tick: Tick, frame: int):
 	var target = tick.target
+	target.current_action = self
 	#if _hurt_data.run_count >= 1:
 	if _pause_count > 0:
 		_pause_count -= 1

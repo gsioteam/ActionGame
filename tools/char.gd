@@ -25,7 +25,7 @@ var gravity setget , get_gravity
 var paused_frame_count = 0
 var paused: bool setget , is_paused
 
-const Action = preload("res://tools/behav/action.gd")
+const Action = preload("res://addons/action_behavior_tree/lib/action.gd")
 var HurtBox
 
 var current_action: Action
@@ -62,6 +62,10 @@ signal hp_changed
 
 export (PackedScene) var hits_label_pack = preload("res://effects/hits_label/hits_label.tscn")
 var _hits_label
+
+export (int) var type_st = 0
+
+var running = true
 
 func get_hits_label():
 	if _hits_label == null:
@@ -114,19 +118,21 @@ func get_grabbed_point() -> Position3D:
 		_grabbed_point = $boxes/grabbed_point
 	return _grabbed_point
 
+var _old_path
 func _physics_process(delta):
-	if not visible or _dead:
+	if not visible or not running or _dead:
 		return
 	if Engine.editor_hint:
 		return
 	var node = get_behav()
+	var speed = Vector3.ZERO
 	if node != null:
 		node.run_tick(tick)
 		tick.end_frame()
 		if paused_frame_count <= 0:
 			if get_anim().playback_speed == 0:
 				get_anim().playback_speed = 1
-			var speed = move_speed
+			speed = move_speed
 			if face != Face.Right:
 				speed.x = -speed.x
 			move_and_slide(speed)
@@ -141,6 +147,15 @@ func _physics_process(delta):
 		if value > 0:
 			 value -= 1
 		counters[key] = value
+	
+	var path
+	if current_action:
+		path = str(get_path_to(current_action))
+	else:
+		path = "null"
+	if type_st and _old_path != path:
+		_old_path = path
+		print(path)
 
 func set_move_speed(speed: Vector3, ignore_face = false):
 	if move_speed == speed:
@@ -253,7 +268,8 @@ func attack_from(from, attack_info: AttackData.Information):
 			var hits_label = get_hits_label()
 			hits_label.text = str(_hurt_list.size(), " hits")
 			var scene = GameScene.current(self)
-			scene.interface.add_child(hits_label)
+			if hits_label.get_parent() != scene.interface:
+				scene.interface.add_child(hits_label)
 			var pos = scene.camera.camera.unproject_position(get_grabbed_point().global_transform.origin + Vector3(0, 0.1, 0))
 			hits_label.reset(pos)
 	if not attack_info.repeat and attack_info.attack_type != AttackData.AttackType.Grab:
@@ -316,10 +332,7 @@ func _enter_tree():
 	if Engine.editor_hint:
 		return
 	var game_scene = GameScene.current(self)
-	if type == Defines.CharaterType.Ally:
-		game_scene.allies.append(self)
-	elif type == Defines.CharaterType.Enemy:
-		game_scene.enemies.append(self)
+	game_scene.add_character(self)
 
 func _exit_tree():
 	if Engine.editor_hint:

@@ -15,7 +15,6 @@ func get_text():
 func _process(delta):
 	if _begin == null:
 		_begin = get_transform().origin
-		print(_begin)
 	_counter += delta
 	if _counter > times:
 		get_parent().remove_child(self)

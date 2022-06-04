@@ -9,6 +9,7 @@ var _idle_reset = false
 
 func action(tick: Tick):
 	var target: Character = tick.target
+	target.current_action = self
 	if idle_frames < boring_frames:
 		target.animate(idle_anim)
 	else:

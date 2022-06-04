@@ -16,3 +16,4 @@ func _face(face):
 func _enter_tree():
 	var game_scene = GameScene.current(self)
 	$container/sprite.rotation_degrees = Vector3(game_scene.rot, 0, 0)
+
