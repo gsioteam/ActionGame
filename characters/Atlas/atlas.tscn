@@ -4657,7 +4657,7 @@ target_path = NodePath("../../../move")
 
 [node name="jump" type="Node" parent="behav/control/dash/jump/Queue"]
 script = ExtResource( 8 )
-target_path = NodePath("../../../../air/jump_only/jump")
+target_path = NodePath("../../../../air/dash_jump_only/jump")
 
 [node name="attack" type="Node" parent="behav/control/dash"]
 script = ExtResource( 17 )
@@ -4712,6 +4712,14 @@ target_path = NodePath("../../../../ground")
 script = ExtResource( 14 )
 
 [node name="jump" type="Node" parent="behav/control/air/jump_only"]
+script = ExtResource( 4 )
+vertical_speed = 5.4
+horizontal_speed = 1.6
+
+[node name="dash_jump_only" type="Node" parent="behav/control/air"]
+script = ExtResource( 14 )
+
+[node name="jump" type="Node" parent="behav/control/air/dash_jump_only"]
 script = ExtResource( 4 )
 vertical_speed = 5.4
 horizontal_speed = 3.0

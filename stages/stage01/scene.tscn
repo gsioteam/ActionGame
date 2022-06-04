@@ -138,3 +138,12 @@ margin_left = 540.0
 margin_top = 19.0
 margin_right = 935.0
 margin_bottom = 74.0
+
+[node name="fps" type="Label" parent="interface"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -62.0
+margin_top = 19.0
+margin_right = -22.0
+margin_bottom = 33.0
+align = 2
