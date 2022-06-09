@@ -13,7 +13,7 @@ var client: colyseus.Client
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# ws://iydzde.colyseus.de:2567
-	client = colyseus.Client.new("ws://iydzde.colyseus.de:2567")
+	client = colyseus.Client.new("wss://iydzde.colyseus.de:2567")
 	reload()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

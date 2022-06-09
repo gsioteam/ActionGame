@@ -16,6 +16,7 @@ func test(tick):
 	if has_hurt_data != null:
 		if not tick.global_context.has("last_hurt_state"):
 			tick.global_context.last_hurt_state = HurtState.Wake
+		tick.global_context.erase("target")
 		var last_state = tick.global_context.last_hurt_state
 		if last_state != HurtState.Launched:
 			if has_hurt_data.attack_type != AttackData.AttackType.Hit or target.air_test():
