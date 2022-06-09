@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/char_ui/char_ui.gd" type="Script" id=1]
 [ext_resource path="res://tools/char/gauge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Atlas/avatar.png" type="Texture" id=3]
+[ext_resource path="res://res/fonts/ark_pixel.tres" type="DynamicFont" id=4]
 
 [node name="char_ui" type="Control"]
 margin_right = 395.0
@@ -35,3 +36,12 @@ margin_right = -63.0
 margin_bottom = -5.135
 bar_color = Color( 0, 0.133333, 1, 1 )
 bg_color = Color( 0.470588, 0.470588, 0.470588, 1 )
+
+[node name="lag" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 25.0
+margin_right = 41.0
+margin_bottom = 39.0
+custom_colors/font_color = Color( 0.0196078, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+align = 1

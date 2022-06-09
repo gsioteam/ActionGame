@@ -4,10 +4,6 @@ export (String) var box_name
 
 var box: Area
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 func test(tick):
 	if box == null:
 		var target: Character = tick.target

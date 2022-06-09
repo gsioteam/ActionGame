@@ -54,7 +54,7 @@ margin_right = 400.0
 margin_bottom = 120.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/focus = SubResource( 3 )
-text = "Remote"
+text = "Online"
 flat = true
 
 [node name="menu" type="Button" parent="rect"]

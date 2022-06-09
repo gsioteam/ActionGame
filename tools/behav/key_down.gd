@@ -22,7 +22,7 @@ func _ready():
 			_action_queues.append(CommandManager.parse_command(string))
 
 func test(tick):
-	var target: Character = tick.target
+	var target = tick.target
 	if not _action_queues.empty():
 		for queue in _action_queues:
 			if fit_face_to and target._origin_face != target.face:

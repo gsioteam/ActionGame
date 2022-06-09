@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 export (String) var idle_anim = "idle"
 export (String) var boring_anim = "boring"

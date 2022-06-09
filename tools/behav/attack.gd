@@ -85,6 +85,6 @@ func attack_info(tick: Tick):
 		var attack_data = attack_datas[_phase]
 		var point
 		if not attack_data.relative_point_name.empty():
-			var character: Character = tick.target
+			var character = tick.target
 			point = character.get_box(attack_data.relative_point_name)
 		return attack_data.get_info(point)

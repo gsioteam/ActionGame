@@ -1,10 +1,17 @@
 extends "res://addons/action_behavior_tree/lib/action.gd"
 
+var _old_target
+
 func action(tick):
 	if not tick.global_context.has("target"):
 		var target = _find(tick)
 		if target != null:
 			tick.global_context["target"] = target
+		if _old_target != target:
+			_old_target = target
+			tick.target.swap_target(target)
+			tick.target.animate("idle")
+			return Status.SUCCEED
 	return Status.FAILED
 
 func _find(tick: Tick):
@@ -24,7 +31,3 @@ func _find(tick: Tick):
 				min_dis = dis
 				target = ally
 		return target
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -45,6 +45,16 @@ class Tick:
 		
 	func end_frame():
 		frame_context.clear()
+	
+	func get_global(key):
+		if not global_context.has(key):
+			return null
+		return global_context[key]
+		
+	func get_frame(key):
+		if not frame_context.has(key):
+			return null
+		return frame_context[key]
 
 func has_new():
 	var active = _last_frame

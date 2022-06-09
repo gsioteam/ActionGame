@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 var _speed
 var _frame_count
@@ -20,6 +20,7 @@ export (Resource) var attack_data
 
 func action(tick):
 	var target: Character = tick.target
+	target.set_key_position()
 	target.state = Defines.CharacterState.Launched
 	attacked = [target]
 	
@@ -58,6 +59,13 @@ func action(tick):
 		_pause_count = 0
 	_current_target = target
 	target.set_move_speed(_speed, _hurt_data.relative_point != null)
+	ext_data = {
+		"speed_x": _speed.x,
+		"speed_y": _speed.y,
+		"speed_z": _speed.z,
+		"frames": _frame_count,
+		"pause": _pause_count,
+	}
 	yield(wait(frames + _pause_count), "completed")
 	get_node("../wake").require_focus()
 
@@ -89,3 +97,4 @@ func reset():
 	.reset()
 	if _pause_count > 0:
 		_current_target.resume()
+

@@ -4,9 +4,11 @@ class_name Character
 const Defines = preload("res://tools/defines.gd")
 const CommandManager = preload("res://addons/action_command/lib/command_manager.gd")
 const Shadow = preload("res://tools/objects/shadow.gd")
+const Controller = preload("res://tools/controllers/controller.gd")
+const LocalController = preload("res://tools/controllers/local_controller.gd")
+const RemoteController = preload("res://tools/controllers/remote_controller.gd")
 
 const Face = Defines.Face
-var tick: BNode.Tick
 export(Face) var face = Face.Left
 export(Vector3) var move_speed = Vector3.ZERO
 export(float) var fall_speed = 0
@@ -28,7 +30,7 @@ var paused: bool setget , is_paused
 const Action = preload("res://addons/action_behavior_tree/lib/action.gd")
 var HurtBox
 
-var current_action: Action
+var current_action: Action setget set_current_action, get_current_action
 
 var guard_action
 
@@ -55,6 +57,8 @@ var _hurt_count = 0
 var _gravity_scaling = 1
 var _damage_scaling = 1
 
+var _hurt_id_counter = 0
+
 signal state_changed
 signal damage
 signal dead
@@ -63,9 +67,15 @@ signal hp_changed
 export (PackedScene) var hits_label_pack = preload("res://effects/hits_label/hits_label.tscn")
 var _hits_label
 
-export (int) var type_st = 0
-
 var running = true
+
+var controller: Controller
+
+var move_vector = Vector3.ZERO
+var _old_move_frame = 0
+var move_frame = 0
+
+var position_frame = 0
 
 func get_hits_label():
 	if _hits_label == null:
@@ -76,10 +86,10 @@ var _dead = false
 
 func _init():
 	HurtBox = load("res://tools/char/hurtbox.gd")
+	controller = LocalController.new(self)
 
 func _ready():
 	assert(face != Face.None)
-	tick = BNode.Tick.new(self)
 	_origin_face = face
 	
 func free():
@@ -124,46 +134,31 @@ func _physics_process(delta):
 		return
 	if Engine.editor_hint:
 		return
-	var node = get_behav()
-	var speed = Vector3.ZERO
-	if node != null:
-		node.run_tick(tick)
-		tick.end_frame()
-		if paused_frame_count <= 0:
-			if get_anim().playback_speed == 0:
-				get_anim().playback_speed = 1
-			speed = move_speed
-			if face != Face.Right:
-				speed.x = -speed.x
-			move_and_slide(speed)
-		else:
-			paused_frame_count -= 1
-	var cmds = get_cmds()
-	if cmds != null:
-		cmds.tick()
+		
+	controller.tick()
+	
+	if move_frame != _old_move_frame:
+		_old_move_frame = move_frame
+		move_vector = move_speed
 	
 	for key in counters.keys():
 		var value = counters[key]
 		if value > 0:
 			 value -= 1
 		counters[key] = value
-	
-	var path
-	if current_action:
-		path = str(get_path_to(current_action))
-	else:
-		path = "null"
-	if type_st and _old_path != path:
-		_old_path = path
-		print(path)
+
+func _process(delta):
+	controller.update(delta)
 
 func set_move_speed(speed: Vector3, ignore_face = false):
-	if move_speed == speed:
-		return
 	if ignore_face:
 		if face != Face.Right:
 			speed.x = -speed.x
+	if move_speed == speed:
+		return
 	move_speed = speed
+
+var _next_animations = []
 
 func animate(name: String, reset = false):
 	var anim = get_anim()
@@ -173,18 +168,25 @@ func animate(name: String, reset = false):
 		return
 	if anim.current_animation == name:
 		anim.stop(true)
-	anim.play(name)
-	yield(anim, "animation_finished")
+	_next_animations.clear()
+	yield(_run_animate(name), "completed")
 
 func queue_animate(animations: Array):
 	var anim = get_anim()
 	if anim == null:
 		return
-	for anim_name in animations:
-		if anim.current_animation == anim_name:
-			anim.stop(true)
-		anim.play(anim_name)
-		yield(anim, "animation_finished")
+	_next_animations.clear()
+	for idx in range(1, animations.size()):
+		_next_animations.append(animations[idx])
+	_run_animate(animations[0])
+
+func _run_animate(name: String):
+	var anim = get_anim()
+	anim.play(name)
+	yield(anim, "animation_finished")
+	if not _next_animations.empty():
+		var anim_name = _next_animations.pop_front()
+		animate(anim_name, true)
 
 func set_face(value):
 	if face != value:
@@ -257,6 +259,8 @@ func attack_from(from, attack_info: AttackData.Information):
 		guard_action.attack_from(self, from, attack_info)
 		return
 	hurt_data = attack_info
+	_hurt_id_counter += 1
+	hurt_data.id = _hurt_id_counter
 	hurt_data.from = from
 	var exist = _hurt_list.has(attack_info.resource)
 	if attack_info.attack_type != AttackData.AttackType.Grab:
@@ -314,6 +318,10 @@ func get_counter(counter: String) -> int:
 func get_hurt_data() -> AttackData.Information:
 	return hurt_data
 
+func set_hurt_data(hurt_data: AttackData.Information):
+	self.hurt_data = hurt_data
+	_hurt_id_counter = hurt_data.id
+
 func pause(frame: int = 24):
 	get_anim().playback_speed = 0
 	paused_frame_count = frame
@@ -329,7 +337,7 @@ func air_test() -> bool:
 	return false
 
 func _enter_tree():
-	if Engine.editor_hint:
+	if Engine.editor_hint or not visible:
 		return
 	var game_scene = GameScene.current(self)
 	game_scene.add_character(self)
@@ -406,8 +414,7 @@ func get_state():
 	return _state
 
 func next_action_phase():
-	if current_action != null:
-		current_action.next_phase(tick)
+	controller.next_action_phase()
 
 func set_v_speed(v):
 	move_speed.y = v
@@ -428,6 +435,7 @@ func get_hp():
 
 func dead():
 	_dead = true
+	print("Dead")
 	emit_signal("dead")
 
 func on_hit(attack_info, target):
@@ -448,3 +456,29 @@ func _get_configuration_warning():
 	if get_grabbed_point() == null:
 		return "No grabbed_point found"
 	return ""
+
+func get_scene_node(path):
+	return GameScene.my_node(self, path)
+
+func get_scene() -> GameScene:
+	return GameScene.current(self)
+
+func setup_remote(room, ch_data):
+	controller = RemoteController.new(controller, room, ch_data)
+
+func set_current_action(v):
+	controller.current_action = v
+
+func get_current_action():
+	if controller == null:
+		return null
+	return controller.current_action
+
+func set_key_speed():
+	move_frame = get_scene().frame
+
+func set_key_position():
+	position_frame = get_scene().frame
+
+func swap_target(character):
+	controller.swap_target(character)

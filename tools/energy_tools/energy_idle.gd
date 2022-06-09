@@ -5,6 +5,7 @@ export (float) var regen_value = 0.5
 
 func action(tick: Tick):
 	.action(tick)
+	tick.target.move_speed = Vector3.ZERO
 	
 	if idle_frames > regen_frames:
 		var target = tick.target

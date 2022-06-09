@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 signal finished
 

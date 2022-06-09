@@ -37,11 +37,11 @@ func action(tick: Tick):
 		2:
 			speed.y = -1
 	target.set_xy_speed(speed.normalized() * horizontal_speed, true)
+	target.v_speed = vertical_speed
 	target.animate("jump")
 	#_runner = CurveRunner.new(vertical_speed, gravity * 0.9)
 	#yield(_runner, "completed")
-	
-	target.v_speed = vertical_speed
+	target.set_key_speed()
 	
 	return Status.FAILED
 

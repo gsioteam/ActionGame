@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 export (float) var maxnum_speed = 30
 export var rise_anim: String = "jump"

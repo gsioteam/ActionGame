@@ -1,35 +1,31 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/path_walk.gd"
 
-export (float) var distance = 5
+export (float) var distance = 2
 export (float) var speed = 0.2
 
 func action(tick: Tick):
-	var target: Character = tick.global_context.target
-	var this: Character = tick.target
-	var target_pos = target.position_2d
-	var this_pos = this.position_2d
-	
-	if abs(target_pos.x - this_pos.x) > 0.3:
-		var face
-		if target_pos.x > this_pos.x:
-			face = Defines.Face.Right
-		else:
-			face = Defines.Face.Left
-		this.set_face(face)
-	
-	var dis = target_pos.distance_to(this_pos)
-	if abs(dis - distance) > 1:
-		if dis > distance:
-			# anear
-			var dir = (target_pos - this_pos).normalized() * speed
-			this.set_move_speed(Vector3(dir.x, 0, dir.y), true)
-			pass
-		else:
-			# away
-			var dir = -(target_pos - this_pos).normalized() * speed
-			this.set_move_speed(Vector3(dir.x, 0, dir.y), true)
-			pass
-		tick.target.animate("walk")
+	if tick.frame_context.remote:
+		load_data(tick)
 	else:
-		tick.target.animate("idle")
-	return Status.SUCCEED
+		var target: Character = tick.global_context.target
+		var this: Character = tick.target
+		var target_pos = target.position_2d
+		var this_pos = this.position_2d
+		
+		var dis = distance + rand_range(-0.5, 0.5)
+		var angle = PI / 2
+		var vec = target_pos - this_pos
+		if vec.length() > 0.1:
+			angle = atan2(vec.y, vec.x)
+		angle += rand_range(-PI / 6, PI / 6)
+		
+		var from = this.transform.origin
+		from.y = 0
+		vec = -Vector3(cos(angle), 0, sin(angle)).normalized()
+		var to = Vector3(target_pos.x, 0, target_pos.y) + vec * dis
+		path = create_path([from, to], speed) 
+		
+		save_data(tick)
+		
+	return .action(tick)
+	

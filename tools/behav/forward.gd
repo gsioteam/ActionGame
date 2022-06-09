@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 const Defines = preload("res://tools/defines.gd")
 
@@ -12,12 +12,21 @@ class Data:
 	var turn_frames: int
 
 var data: Data
-var _frame_counter = 0;
+var _frame_counter = 0
+	
 
 func action(tick):
-	var target: Character = tick.target
+	var target = tick.target
 	target.current_action = self
-	var turning = _frame_counter < data.turn_frames and face != Defines.Face.None and target.face != face
+	var turning
+	if tick.frame_context.remote:
+		turning = ext_data.turning
+	else:
+		turning = _frame_counter < data.turn_frames and face != Defines.Face.None and target.face != face
+		ext_data = {
+			"turning": turning,
+			"turning_count": get_parent()._turning_count
+		}
 	
 	if not air_move:
 		if turning:
@@ -35,3 +44,10 @@ func action(tick):
 func reset():
 	.reset()
 	_frame_counter = 0
+
+func get_action_node():
+	var switch = get_parent()
+	switch.index = get_index()
+	if has_ext("turning_count"):
+		switch._turning_count = ext_data.turning_count
+	return switch

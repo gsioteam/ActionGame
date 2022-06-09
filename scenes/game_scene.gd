@@ -2,6 +2,7 @@ tool
 extends Node
 const colyseus = preload("res://addons/godot_colyseus/lib/colyseus.gd")
 const schemas = preload("res://scenes/remote_list/schemas.gd")
+const RemoteData = preload("res://tools/controllers/remote_data.gd")
 
 class_name GameScene
 
@@ -16,6 +17,8 @@ var interface: Control
 
 var room: colyseus.Room
 var running: bool setget set_running, get_running
+var frame_counter = 0
+var frame: int setget , get_frame
 
 static func current(var node: Node) -> GameScene:
 	var GameScene = load("res://scenes/game_scene.gd") 
@@ -27,6 +30,14 @@ static func current(var node: Node) -> GameScene:
 		node = node.get_parent()
 	return null
 
+static func my_path(var node: Node) -> NodePath:
+	return current(node).get_path_to(node)
+
+static func my_node(var node, var path) -> Node:
+	if path.empty():
+		return null
+	return current(node).get_node(path)
+
 func _ready():
 	camera = $camera
 	interface = $interface
@@ -36,15 +47,16 @@ func _ready():
 		yield(get_tree(), "idle_frame")
 		var allies = []
 		for ally in self.allies:
-			allies.append(get_character_data(ally))
+			allies.append(RemoteData.get_character_data(ally))
 		var enemies = []
 		for enemy in self.enemies:
-			enemies.append(get_character_data(enemy))
+			enemies.append(RemoteData.get_character_data(enemy))
 		var map = {
 			"allies": allies,
 			"enemies": enemies,
 		}
 		room.send("scene_ready", map)
+		room.on_message("ping").on(funcref(self, "_on_ping"))
 
 func _get_configuration_warning():
 	if $camera == null:
@@ -87,24 +99,39 @@ func set_running(v):
 func get_running():
 	return _running
 
-func get_character_data(character: KinematicBody):
-	var pos = character.transform.origin
-	
-	var action = 'null'
-	if character.current_action != null:
-		action = str(character.get_path_to(character.current_action))
-	
-	return {
-		"x": pos.x,
-		"y": pos.y,
-		"z": pos.z,
-		"node": str(get_path_to(character)),
-		"action": action,
-	}
-
+var ready_to_sycn = false
 func _physics_process(delta):
-	if room != null and !running:
+	if room != null and !self.running:
 		var state: schemas.RoomState = room.get_state()
-		if state.state == 2:
-			var keys = state.characters.keys()
+		var keys = state.characters.keys()
+		if state.state == 2 and keys.size() > 0:
 			print(keys)
+			for path in keys:
+				var child = get_node(path)
+				child.setup_remote(room, state.characters.at(path))
+			self.running = true
+			ready_to_sycn = true
+	if self.running:
+		frame_counter += 1
+
+func _on_process_physics_process(delta):
+	if ready_to_sycn:
+		var data = []
+		for ch in allies:
+			var char_data = ch.controller.get_character_data()
+			if char_data != null:
+				data.append(char_data)
+		for ch in enemies:
+			var char_data = ch.controller.get_character_data()
+			if char_data != null:
+				data.append(char_data)
+		
+		room.send("sync", {
+			"data": data
+		})
+
+func get_frame():
+	return frame_counter
+
+func _on_ping(data):
+	room.send("ping_echo", data)

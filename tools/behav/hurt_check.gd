@@ -5,7 +5,7 @@ const HurtState = AttackData.HurtState
 var _switch
 
 func _ready():
-	_switch = $Switch
+	_switch = $switch
 
 func test(tick):
 	var target: Character = tick.target
@@ -33,7 +33,7 @@ func test(tick):
 		var switch = _switch
 		if last_state == HurtState.Wake:
 			return false
-		assert(last_state != HurtState.Wake)
+		
 		match last_state:
 			HurtState.Smashed:
 				switch.index = 0

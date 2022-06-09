@@ -14,6 +14,8 @@ var _avatar_texture
 
 var _tp: Gauge
 
+var lag: Label
+
 func _ready():
 	if target == null:
 		target = get_node(target_path)
@@ -29,6 +31,8 @@ func _ready():
 	
 	_tp = $tp
 	_tp.percent = target.energy / target.max_energy
+	
+	lag = $lag
 
 func set_avatar(v):
 	if _avatar != v:
@@ -47,3 +51,20 @@ func _on_hp_changed():
 
 func _on_energy_changed():
 	_tp.percent = target.energy / target.max_energy
+
+func _process(delta):
+	var lag_time = target.controller.get_lag()
+	if lag_time == 0:
+		lag.text = ""
+	else:
+		lag.text = str(lag_time, "ms")
+		if lag_time < 0:
+			lag.add_color_override("font_color", Color.red)
+			lag.text = "Offline"
+		elif lag_time > 80:
+			lag.add_color_override("font_color", Color.yellow)
+		elif lag_time > 200:
+			lag.add_color_override("font_color", Color.red)
+		else:
+			lag.add_color_override("font_color", Color.green)
+			

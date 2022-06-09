@@ -23,6 +23,5 @@ margin_bottom = 18.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Enter"
-flat = true
 
 [connection signal="pressed" from="enter" to="." method="_on_enter_pressed"]

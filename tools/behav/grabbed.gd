@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 
 const _anims = ["grabbed", "hurt"]
@@ -13,9 +13,18 @@ var character
 
 func action(tick):
 	var target: Character = tick.target
+	target.set_key_position()
 	target.current_action = self
 	var hurt_data = target.get_hurt_data()
 	self.target = hurt_data.relative_point
+	if self.target != null:
+		ext_data = {
+			"target": GameScene.my_path(self.target),
+		}
+	elif has_ext("target"):
+		self.target = GameScene.current(self).get_node(ext_data.target)
+	else:
+		return Status.FAILED
 	character = target
 	if anim_name == null:
 		if target.get_anim().has_animation("grabbed"):
@@ -33,8 +42,8 @@ func running(tick: Tick, frame: int):
 	target.state = Defines.CharacterState.Grabbed
 	var hurt_data = target.get_hurt_data()
 	var from: Character = hurt_data.from
-	var checked = from.current_action != null and from.current_action.has_method("grab_data") and hurt_data == from.current_action.grab_data()
-	if not checked:
+	var is_grabbed = from.current_action != null and from.current_action.has_method("grab_data") and hurt_data == from.current_action.grab_data()
+	if not is_grabbed:
 		emit_signal("finished")
 	else:
 		pass

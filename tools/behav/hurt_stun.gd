@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 const Defines = preload("res://tools/defines.gd")
 
@@ -16,6 +16,7 @@ var anim_index = -1
 
 func action(tick):
 	var target = tick.target
+	target.set_key_position()
 	target.current_action = self
 	target.state = Defines.CharacterState.Pain
 	if animations == null:

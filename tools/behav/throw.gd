@@ -7,19 +7,28 @@ export (bool) var is_seismic_toss = false
 export (Vector3) var begin_speed
 
 var finished = false
+var grab_target
 
 func action(tick: Tick):
 	_phase = 0
 	finished = false
-	var character: Character = tick.global_context.grab_target
+	if tick.global_context.has("grab_target"):
+		grab_target = tick.global_context.grab_target
+		ext_data = {
+			"grab_target": GameScene.my_path(grab_target)
+		}
+	elif ext_data != null and ext_data.has("grab_target"):
+		grab_target = GameScene.my_node(self, ext_data.grab_target)
+	else:
+		return Status.FAILED
 	var target: Character = tick.target
 	var data = attack_info(tick)
 	if data == null:
 		return Status.FAILED
 	_grab_data = data
-	direct_attack(target, character, data)
+	direct_attack(target, grab_target, data)
 	var ret = .action(tick)
-	attacked = [character]
+	attacked = [grab_target]
 	if is_seismic_toss:
 		target.move_speed = begin_speed
 	return ret
@@ -55,7 +64,7 @@ func grab_data():
 
 func next_phase(tick: Tick):
 	.next_phase(tick)
-	var character: Character = tick.global_context.grab_target
+	var character: Character = grab_target
 	var target: Character = tick.target
 	var info = attack_info(tick)
 	_grab_data = null

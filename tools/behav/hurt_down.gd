@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 export(int) var min_frames = 60
 export(int) var max_frames = 120
@@ -9,6 +9,7 @@ var _canceled = false
 
 func action(tick):
 	var target: Character = tick.target
+	target.set_key_position()
 	target.current_action = self
 	target.state = Defines.CharacterState.Down
 	var hurt_data: AttackData.Information = target.get_hurt_data()
@@ -31,3 +32,5 @@ func can_cancel(tick: Tick, frame: int):
 
 func enter_subaction(tick: Tick, subaction):
 	_canceled = true
+	var target: Character = tick.target
+	target.hurt_data = null

@@ -42,6 +42,8 @@ export(float) var damage_scaling = 0.95
 export (int) var launch_damage = 0
 
 class Information:
+	var id: int
+	
 	var power: float
 	var direction: Vector3
 	var damage: int

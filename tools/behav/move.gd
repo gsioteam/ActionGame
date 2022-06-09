@@ -21,9 +21,13 @@ func _ready():
 			subnode.data = data
 
 func tick(tick: Tick):
-	var target: Character = tick.target
-	var dir = target.get_direction()
-	self.index = dir - 1
+	var target = tick.target
+	var dir
+	if tick.frame_context.remote:
+		dir = self.index + 1
+	else:
+		dir = target.get_direction()
+		self.index = dir - 1
 	var to_face
 	match self.index % 3:
 		0: 
@@ -36,13 +40,17 @@ func tick(tick: Tick):
 	if _turning_count > 0:
 		_turning_count -= 1
 		if _turning_count == 0:
+			if get_parent().name == "dash":
+				print("Tick 1 ", self.index)
 			return Status.FAILED
 		# print(_turning_count, " face ", to_face, " ",  _turn_to_face)
-		if dir == 5 || to_face == _turn_to_face:
+		if to_face == _turn_to_face:
 			target.set_xy_speed(Vector2.ZERO)
+			if get_parent().name == "dash":
+				print("Tick 2 ", _turning_count)
 			return Status.SUCCEED
 		_turning_count = 0
-		
+	
 	if to_face != Defines.Face.None:
 		if to_face != target.face:
 			_turn_to_face = to_face

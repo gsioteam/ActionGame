@@ -10,20 +10,24 @@ speed = 0.8
 
 [node name="d1" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, 1 )
 face = 1
 
 [node name="d2" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 0, 1 )
 
 [node name="d3" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, 1 )
 face = 2
 
 [node name="d4" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, 0 )
 face = 1
 
@@ -32,19 +36,23 @@ script = ExtResource( 3 )
 
 [node name="d6" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, 0 )
 face = 2
 
 [node name="d7" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, -1 )
 face = 1
 
 [node name="d8" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 0, -1 )
 
 [node name="d9" type="Node" parent="."]
 script = ExtResource( 2 )
+continuous = true
 speed = Vector2( 1, -1 )
 face = 2

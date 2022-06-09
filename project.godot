@@ -90,10 +90,6 @@ config/name="ActionGame"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/action_behavior_tree/plugin.cfg", "res://addons/action_command/plugin.cfg", "res://addons/godot_colyseus/plugin.cfg", "res://addons/top_animated_sprite3d/plugin.cfg" )

@@ -1,4 +1,4 @@
-extends "res://addons/action_behavior_tree/lib/action.gd"
+extends "res://tools/behav/ext_action.gd"
 
 export(String) var action_name
 export(bool) var reset_speed = true
@@ -11,6 +11,7 @@ func action(tick):
 	target.current_action = self
 	if reset_speed:
 		target.set_xy_speed(Vector2.ZERO)
+	target.set_key_position()
 	var yield_state: GDScriptFunctionState = target.animate(action_name, true)
 	yield(yield_state, "completed")
 	# target.current_action = null
