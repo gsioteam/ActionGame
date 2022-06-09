@@ -100,6 +100,10 @@ texture={
 "flags/filter": false
 }
 
+[network]
+
+ssl/certificates="res://certificates.cer"
+
 [physics]
 
 common/enable_pause_aware_picking=true
