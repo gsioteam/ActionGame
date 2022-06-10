@@ -53,6 +53,8 @@ func _on_energy_changed():
 	_tp.percent = target.energy / target.max_energy
 
 func _process(delta):
+	if target == null:
+		return
 	var lag_time = target.controller.get_lag()
 	if lag_time == 0:
 		lag.text = ""
