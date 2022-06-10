@@ -41,7 +41,6 @@ func action(tick: Tick):
 			path = create_path([from, middle, to], speed)
 			
 		save_data(tick)
-		print(target_pos, ext_data)
 	
 	return .action(tick)
 

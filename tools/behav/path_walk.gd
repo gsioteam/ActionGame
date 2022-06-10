@@ -59,8 +59,6 @@ func running(tick: Tick, frame: int):
 			this.set_face(face)
 		
 		this.set_move_speed(node.speed, true)
-		if name == "att1_anear":
-			print(node.speed)
 		
 		_frame += 1
 		if _frame >= node.frames:

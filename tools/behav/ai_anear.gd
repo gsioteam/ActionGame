@@ -5,8 +5,7 @@ export (float) var max_frame = 120
 export (float) var far = 2
 export (float) var near = 0.1
 
-func action(tick: Tick):
-	print(name)
+func action(tick):
 	if tick.frame_context.remote:
 		load_data(tick)
 	else:

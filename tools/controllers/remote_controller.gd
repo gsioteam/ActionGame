@@ -106,16 +106,39 @@ func tick():
 		else:
 			character.paused_frame_count -= 1
 
+
+var _sync_speed: float = 0
+
 func update(delta):
 	if not is_control():
-		var pos = Vector3(char_schema.x, char_schema.y, char_schema.z)
+		var pos = char_schema.get_position()
 		var local_pos = character.transform.origin
 		var dis = pos.distance_to(local_pos)
 		if dis > 1:
-			character.transform.origin = pos
+			sync_position()
 		#else:
 		#	character.transform.origin = (pos - local_pos) * delta * 20 + local_pos
-	pass
+	
+	if _sync_speed != 0:
+		var pos = char_schema.get_position()
+		var local_pos = character.transform.origin
+		var speed = _sync_speed * delta
+		var dis = pos.distance_to(local_pos)
+		if speed >= dis:
+			character.transform.origin = pos
+			_sync_speed = 0
+		else:
+			character.transform.origin = local_pos + (pos - local_pos) * speed
+
+func sync_position():
+	var pos = char_schema.get_position()
+	var local_pos = character.transform.origin
+	var dis = pos.distance_to(local_pos)
+	if dis > 3:
+		_sync_speed = 12
+	else:
+		_sync_speed = 3
+	
 
 func is_vec_nan(vec3: Vector3):
 	return is_nan(vec3.x) or is_nan(vec3.y) or is_nan(vec3.z)

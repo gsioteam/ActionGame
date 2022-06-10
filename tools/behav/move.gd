@@ -40,14 +40,10 @@ func tick(tick: Tick):
 	if _turning_count > 0:
 		_turning_count -= 1
 		if _turning_count == 0:
-			if get_parent().name == "dash":
-				print("Tick 1 ", self.index)
 			return Status.FAILED
 		# print(_turning_count, " face ", to_face, " ",  _turn_to_face)
 		if to_face == _turn_to_face:
 			target.set_xy_speed(Vector2.ZERO)
-			if get_parent().name == "dash":
-				print("Tick 2 ", _turning_count)
 			return Status.SUCCEED
 		_turning_count = 0
 	

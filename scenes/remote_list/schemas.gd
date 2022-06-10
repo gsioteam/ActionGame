@@ -47,6 +47,9 @@ class CharSchema extends colyseus.Schema:
 			colyseus.Field.new("move_frame", colyseus.NUMBER),
 			colyseus.Field.new("character_state", colyseus.NUMBER),
 		]
+	
+	func get_position():
+		return Vector3(self.x, self.y, self.z)
 
 class PlayerSchema extends colyseus.Schema:
 	static func define_fields():
