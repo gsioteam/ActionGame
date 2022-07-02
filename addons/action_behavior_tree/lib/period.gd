@@ -1,3 +1,4 @@
+tool
 extends "res://addons/action_behavior_tree/lib/group_node.gd"
 
 export var duration: int = 5

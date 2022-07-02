@@ -24,6 +24,7 @@ class RunningTask:
 
 var process: RunningTask = null
 var _running: Running
+var finished = false
 
 func _ready():
 	for child in get_children():
@@ -54,6 +55,7 @@ func tick(tick):
 				_running.tick(tick)
 		else:
 			process = null
+			finished = true
 			stop_running()
 		if can_cancel(tick, frame):
 			for child in get_children():
@@ -74,6 +76,7 @@ func tick(tick):
 		return status
 
 func _run_action(tick: Tick):
+	finished = false
 	var result = action(tick);
 	if result is GDScriptFunctionState:
 		process = RunningTask.new(result)

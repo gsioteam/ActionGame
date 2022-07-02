@@ -26,9 +26,9 @@ func can_cancel(tick: Tick, frame: int) -> bool:
 		CancelType.FrameCount:
 			_can_cancel = frame > cancel_frames
 		CancelType.NextAction:
-			_can_cancel = attack_node.process == null
+			_can_cancel = attack_node.finished
 		CancelType.NextAndHit:
-			_can_cancel = attack_node.process == null and attack_node.attacked.size() > 0
+			_can_cancel = attack_node.finished and attack_node.attacked.size() > 0
 	return _can_cancel
 
 func tick(tick):

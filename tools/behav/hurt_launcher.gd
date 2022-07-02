@@ -52,7 +52,9 @@ func action(tick):
 		var body_pos = target.global_transform.origin
 		target_pos = body_pos - grabbed_pos + target_pos
 		var dir = target_pos - body_pos
-		_speed = dir * hurt_data.power / 3 + hurt_data.direction
+		_speed = dir * hurt_data.power / 3
+		_speed.x = min(1, max(-1, _speed.x))
+		_speed += hurt_data.direction
 	_frame_count = frames
 	_pause_count = pause_frame * hurt_data.power / 24
 	if _hurt_data.attack_type == AttackData.AttackType.Throw:

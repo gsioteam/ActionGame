@@ -6,12 +6,12 @@ export (Resource) var hit_data
 export (bool) var is_seismic_toss = false
 export (Vector3) var begin_speed
 
-var finished = false
+var land = false
 var grab_target
 
 func action(tick: Tick):
 	_phase = 0
-	finished = false
+	land = false
 	if tick.global_context.has("grab_target"):
 		grab_target = tick.global_context.grab_target
 		ext_data = {
@@ -37,7 +37,7 @@ func running(tick: Tick, frame: int):
 	var target: Character = tick.target
 	if is_seismic_toss and target.move_speed.y < 0 and not target.air_test():
 		next_phase(tick)
-		finished = true
+		land = true
 	_target = target
 	if is_seismic_toss and not target.is_paused():
 		target.move_speed.y -= target.gravity
@@ -84,7 +84,7 @@ func direct_attack(this: Character, target: Character, attack_info):
 
 func can_cancel(tick: Tick, frame: int):
 	if is_seismic_toss:
-		if finished:
+		if land:
 			return .can_cancel(tick, frame)
 		return false
 	else:
